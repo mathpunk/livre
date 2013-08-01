@@ -5,8 +5,9 @@
 (defpartial layout [& content]
             (html5
               [:head
-               [:title "livre"]
-               (include-css "/css/reset.css")]
+               [:title "punk mathematics"]
+               (include-css "/css/reset.css")
+               (include-css "/css/fstorr-mathpunk.css")] 
               [:body
                [:div#wrapper
                 content]]))
