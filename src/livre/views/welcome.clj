@@ -19,3 +19,19 @@
            ]
           ))
 
+(defpage "/css-viewer" [ ]
+  (common/layout
+    [:nav "nav"]
+    [:div#wrapper "#wrapper"
+      [:div#alert ".alert" ]
+      [:div#main 
+        [:p "#main"]
+        [:p "Look I've got " [:a {:href "omgbutts.com"}]]
+        [:div#cont-wrapper "#cont-wrapper"]
+        [:div#comments "#comments"]
+        [:div#wp_paypal_shopping_cart_widgets "#wp_paypal_shopping_cart_widgets"]
+        ]
+    ]
+    [:footer "footer"]
+  ))
+
