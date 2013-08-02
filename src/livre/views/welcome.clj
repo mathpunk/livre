@@ -8,7 +8,9 @@
 
 (defpage "/partial-ordure" [ ]
   (common/layout
-    [:p "asdf"]))
+    [:div#controls
+     [:p "I wish I were a piano"]]
+    ))
 
 (defpage "/statistics" []
          (common/layout
@@ -19,6 +21,7 @@
             [:p "web clippings: " (str "parsing")]
            ]
            [:div#graph
+            
            ]
           ))
 
