@@ -16,7 +16,7 @@
             [:p "word count: " (str 455251)]
             [:p "index cards: " (str 1142)]
             [:p "notebook pages: " (str 1686)]
-            [:p "web clippings: " (str "unknown")]
+            [:p "web clippings: " (str "parsing")]
            ]
            [:div#graph
            ]
