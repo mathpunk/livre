@@ -6,6 +6,9 @@
          (common/layout
            [:p "Welcome to livre"]))
 
+(defpage "/partial-ordure" [ ]
+  (common/layout
+    [:p "asdf"]))
 
 (defpage "/statistics" []
          (common/layout
