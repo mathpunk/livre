@@ -1,33 +1,17 @@
 ; Forked and mutated from http://blog.malcolmsparks.com/?p=67 
+; WARNING: USES HARDCODED DIRECTORY LINKS LIKE A DUMMY see /home/thomas/<blah blah>
 
+; an overspecific namespace-- this db ought to work for other types
 (ns data.inventory.vimwiki)
-; data protocols/records
+
+; Cloned db from a random blog post har har
+; Record and log protocols
 (defprotocol Transaction (update [_ state]))
-
-(defrecord CreateUser [name email start-date]
-  Transaction
-  (update [this db]
-    (update-in db [:users] conj
-      {:name name :email email :start-date start-date})))
-
-(defrecord DeleteUser [email remove-date]
-  Transaction
-  (update [this db]
-    (update-in db [:users]
-      (fn [coll] (remove (fn [r] (= (:email r) email)) coll)))))
-
-; transaction protocols/records
-
 (defprotocol TransactionLog (record [_ tx]))
 
-; Here’s an implementation that uses an agent to write the records to a print-stream.
-;
-; The agent will hold the print-stream. Agents are good for I/O because messages
-; to them only get delivered if the transaction completes its update succesfully.
-; If a retry is needed the message doesn’t get delivered. We let the Clojure prn
-; function figure out how to serialize it. It’s optional, but the
-; actual print statement is in an io! wrapper as a safety check.
-
+; "Uses an agent to write records to a print-stream. If a retry 
+; is needed the message doesn't get delivered, because agents. The
+; print statement is in an optional io! wrapper as a safety check."
 (defrecord DefaultTransactionLog [ag]
   TransactionLog
   (record [this tx]
@@ -36,68 +20,43 @@
         (binding [*out* out *flush-on-newline* true]
           (io! (prn tx)) out)))))
 
-; reading the transactions in a file
-; Having written the records we’ll need some way of reading them back. We’ll
-; just use the standard Clojure reader for this. This function returns a list
-; of all the transactions in a file.
-
 (defn read-transactions [f]
+  "Uses the standard Clojure reader to return a list of all the
+  transactions in a file."
   (if-not (.exists f) []
     (let [rdr (java.io.PushbackReader. (clojure.java.io/reader f))]
       (take-while identity
         (repeatedly 
           (fn [] (read rdr false nil)))))))
 
-; database state
-; Now we move on to the database state. Let’s decorate the transaction log with
-; something that will hold this state. As transactions are added to it they
-; will update the in-memory state and be recorded on disk. This can support the
-; TransactionLog protocol as well. The state will be a Clojure ref. The
-; delegate will be a backing transaction log.
-
+; "As transactions are added they will update the in-memory state 
+; and be recorded on disk. The state will be a ref, and the delegate
+; will be a backing transaction log. I have no idea what any of this
+; means."
 (defrecord Database [state delegate]
   TransactionLog
   (record [this tx]
     (dosync
      (alter state (partial update tx))
      (record delegate tx))))
-; creating the database 
-; Now we’re ready to create our database with the Clojure ref and backing  transaction log. 
-; We’ll initialize the ref with a result of updating an empty
-; map with a series of transactions read from our file.
 
 (def db 
+  "Create our database with the Clojure ref and backing transaction
+  log. We'll initialize the ref with the result of updating an 
+  empty map with a series of transactions read from our file."
    (Database.
      (ref (reduce (fn [db tx] (update tx db)) {}
                     (read-transactions
-                      (clojure.java.io/file "my.db.clj"))))
+                      (clojure.java.io/file "/home/thomas/src/livre/src/livre/data/text-db.clj"))))
      (DefaultTransactionLog. 
        (agent (clojure.java.io/writer
-                (clojure.java.io/file "my.db.clj")
+                (clojure.java.io/file "/home/thomas/src/livre/src/livre/data/text-db.clj")
                 :append true)))))
-
-; convenience functions
-
-(defn delete-user [email]
-    (record db (DeleteUser. email (java.util.Date.))))
-
-(defn create-user [name email]
-    (record db (CreateUser. name email (java.util.Date.))))
-
-; tests
-
-(create-user "Bob" "bob@example.org")
-(create-user "Alice" "alice@example.org")
-(create-user "Carol" "carol@example.org")
-(delete-user "alice@example.org")
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; repurposing for Copy records
-;
 (def test-file "/home/thomas/src/livre/resources/material/vimwiki/big-picture.wiki")
 (def test-dir "/home/thomas/src/livre/resources/material/vimwiki/")
-(defn- uuid [] (str (java.util.UUID/randomUUID)))
 
 (defrecord CreateCopy [id title path content history]
   Transaction
@@ -113,36 +72,27 @@
   )
 
 (defn create-copy [filename]
-  (let [file (new java.io.File filename)]
+  "Convenience function."
+  (let [file (new java.io.File filename),
+        uuid (str (java.util.UUID/randomUUID))]
     (record db (CreateCopy. 
-                  (uuid),                         ; id
-         (.getName file),                         ; title
-       (.getParent file),                         ; path
-            (slurp file),                         ; content
-  [{:timestamp (.lastModified file) :diff nil}]))    ; history 
+                    uuid,              ; id
+        (.getName file),               ; title
+       (.getParent file),              ; path
+            (slurp file),              ; content
+  [{:timestamp (.lastModified file)    ; history 
+    :diff nil}]))                            
     )
   )
 
-
-
 (create-copy test-file)
 
-
 ; What’s the state of the database?
+(def conn (deref (:state db)))
 
-(deref (:state db))    
+(count (conn :copy))
 
-; You should see something like this :-
-
-{:users 
-  ({:name "Carol",
-    :email "carol@example.org",
-    :start-date #inst "2012-04-19T16:00:35.903-00:00"}
-   {:name "Bob",
-    :email "bob@example.org",
-    :start-date #inst "2012-04-19T16:00:35.901-00:00"})}
-
-; Goal data: something like--
+; Should be something like this--
 {:copy 
   ({:name "big-picture.wiki"
     :content "<<some stuff>>"
@@ -150,19 +100,20 @@
     :path "~/src/livre/src/livre/data/vimwiki"})}
 
 
-; What’s in our database file? Below is the raw content. Unlike some database
-; files it’s quite easy to read and even possible to edit by hand if the need
-; arises.
 
-#blog.CreateUser{:name "Bob", :email 
-"bob@example.org", :start-date #inst 
-"2012-04-19T16:00:35.901-00:00"}
-#blog.CreateUser{:name "Alice", :email 
-"alice@example.org", :start-date #inst 
-"2012-04-19T16:00:35.903-00:00"}
-#blog.CreateUser{:name "Carol", :email 
-"carol@example.org", :start-date #inst 
-"2012-04-19T16:00:35.903-00:00"}
-#blog.DeleteUser{:email "alice@example.org", 
-:remove-date #inst 
-"2012-04-19T16:00:35.904-00:00"}
+  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; an example of a non-destructive "remove" function, for possible
+; use later. 
+
+(defrecord DeleteUser [email remove-date]
+  "Remove, id'ing by email and noting the date."
+  Transaction
+  (update [this db]
+    (update-in db [:users]
+      (fn [coll] (remove (fn [r] (= (:email r) email)) coll)))))
+
+(defn delete-user [email]
+  "Convenience function."
+    (record db (DeleteUser. email (java.util.Date.))))
+
