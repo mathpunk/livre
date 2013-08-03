@@ -99,27 +99,31 @@
 (def test-dir "/home/thomas/src/livre/resources/material/vimwiki/")
 (defn- uuid [] (str (java.util.UUID/randomUUID)))
 
-(defrecord CreateCopy [file]
+(defrecord CreateCopy [id title path content history]
   Transaction
   (update [this db]
     (update-in db [:copy] conj
-      {
-        :id (uuid)
-        :history [
-            { :timestamp (.lastModified file)   ; using modified time as a best guess
-              :diff ""
-            }
-          ]
-        :content (slurp file)                   ; the full text of the file
-        :title  (.getName file)
-        :path (.getParent file)
-      })
+      {:id id 
+       :title title
+       :path path 
+       :content content
+       :history history}
+      )
     )
   )
 
 (defn create-copy [filename]
   (let [file (new java.io.File filename)]
-    (record db (CreateCopy. file))))
+    (record db (CreateCopy. 
+                  (uuid),                         ; id
+         (.getName file),                         ; title
+       (.getParent file),                         ; path
+            (slurp file),                         ; content
+  [{:timestamp (.lastModified file) :diff nil}]))    ; history 
+    )
+  )
+
+
 
 (create-copy test-file)
 
