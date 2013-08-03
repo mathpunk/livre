@@ -16,7 +16,7 @@
   yet get away with it because I am also taking the time to really explain those
   special effects that, in Thomas Henderson's opinions, really are important. 
 
-the big picture
+# the big picture
 We seriously live in the cyberpunk future that we were warned about.  The
 iDevices, the corporate control, the collapse of news, the failed globe, the
 billion in slums, the economic singularity drawing all money labor and
