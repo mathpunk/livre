@@ -88,21 +88,21 @@
     )
   )
 
+; TEST FOR create-copy
+; (defn test-copy [ ]
+;  (let [test-file "/home/thomas/src/livre/resources/material/vimwiki/big-picture.wiki"]
+;    (create-copy test-file)))
+;(test-copy)
 
-; notes for inventory
-; TRANSFORM INTO DATA STRUCTURES
-(def archive "/home/thomas/cerebra/wiki/wiki-archive") ; dead
+
+(def dead-wiki "/home/thomas/cerebra/wiki/wiki-archive") 
+(def live-pm-wiki "/home/thomas/cerebra/wiki/pm")
 
 ; Transform all archive's files into Files (not Directories) and map them.
+; Okay, it looks like you'll want to change CreateCopy to expect files instead of names, 'cause this file-seq to filter
+; is pretty cool. 
 (defn records [archive]
-    (map record 
-         (filter #(.isFile %) 
-                  (file-seq (clojure.java.io/file archive)))
-        )
+  (filter #(.isFile %) 
+     (file-seq (clojure.java.io/file archive)))
   )
 
-;;;; testing Copy DB
-(defn test-copy [ ]
-  (let [test-file "/home/thomas/src/livre/resources/material/vimwiki/big-picture.wiki"]
-    (create-copy test-file)))
-(test-copy)
