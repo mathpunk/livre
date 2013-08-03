@@ -1,14 +1,13 @@
 ; Forked and mutated from http://blog.malcolmsparks.com/?p=67 
 ; WARNING: USES HARDCODED DIRECTORY LINKS LIKE A DUMMY see /home/thomas/<blah blah>
+; WARNING: IS DUMB
 
-; an overspecific namespace-- this db ought to work for other types
-(ns data.inventory.vimwiki)
-
-; Cloned db from a random blog post har har
+(ns data.lame-db)
 ; Record and log protocols
 (defprotocol Transaction (update [_ state]))
 (defprotocol TransactionLog (record [_ tx]))
 
+; Transaction Log
 ; "Uses an agent to write records to a print-stream. If a retry 
 ; is needed the message doesn't get delivered, because agents. The
 ; print statement is in an optional io! wrapper as a safety check."
@@ -29,6 +28,7 @@
         (repeatedly 
           (fn [] (read rdr false nil)))))))
 
+; Database
 ; "As transactions are added they will update the in-memory state 
 ; and be recorded on disk. The state will be a ref, and the delegate
 ; will be a backing transaction log. I have no idea what any of this
@@ -53,10 +53,13 @@
                 (clojure.java.io/file "/home/thomas/src/livre/src/livre/data/text-db.clj")
                 :append true)))))
 
+; "Connecting" (kind of): What is the current state of the db?
+(def conn (deref (:state db)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; repurposing for Copy records
-(def test-file "/home/thomas/src/livre/resources/material/vimwiki/big-picture.wiki")
-(def test-dir "/home/thomas/src/livre/resources/material/vimwiki/")
+
+(ns data.lame-db.copy
+  (:use data.lame-db))
 
 (defrecord CreateCopy [id title path content history]
   Transaction
@@ -85,35 +88,7 @@
     )
   )
 
+;;;;;;; TESTING
+(def test-file "/home/thomas/src/livre/resources/material/vimwiki/big-picture.wiki")
+(def test-dir "/home/thomas/src/livre/resources/material/vimwiki/")
 (create-copy test-file)
-
-; What’s the state of the database?
-(def conn (deref (:state db)))
-
-(count (conn :copy))
-
-; Should be something like this--
-{:copy 
-  ({:name "big-picture.wiki"
-    :content "<<some stuff>>"
-    :history {:timestamp #inst "<<m-time>>", :diff ""}
-    :path "~/src/livre/src/livre/data/vimwiki"})}
-
-
-
-  
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; an example of a non-destructive "remove" function, for possible
-; use later. 
-
-(defrecord DeleteUser [email remove-date]
-  "Remove, id'ing by email and noting the date."
-  Transaction
-  (update [this db]
-    (update-in db [:users]
-      (fn [coll] (remove (fn [r] (= (:email r) email)) coll)))))
-
-(defn delete-user [email]
-  "Convenience function."
-    (record db (DeleteUser. email (java.util.Date.))))
-
