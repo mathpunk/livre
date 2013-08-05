@@ -3389,22 +3389,22 @@ cljs.core.with_meta = function with_meta(b, c) {
   var d = cljs.core.fn_QMARK_.call(null, b);
   d && (d = b ? ((d = b.cljs$lang$protocol_mask$partition0$ & 262144) ? d : b.cljs$core$IWithMeta$) || (b.cljs$lang$protocol_mask$partition0$ ? 0 : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b)) : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b), d = !d);
   return d ? with_meta.call(null, function() {
-    if(void 0 === cljs.core.t6103) {
-      cljs.core.t6103 = {};
-      cljs.core.t6103 = function(b, c, d, e) {
+    if(void 0 === cljs.core.t6125) {
+      cljs.core.t6125 = {};
+      cljs.core.t6125 = function(b, c, d, e) {
         this.meta = b;
         this.o = c;
         this.with_meta = d;
-        this.meta6104 = e;
+        this.meta6126 = e;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t6103.cljs$lang$type = !0;
-      cljs.core.t6103.cljs$lang$ctorStr = "cljs.core/t6103";
-      cljs.core.t6103.cljs$lang$ctorPrWriter = function(b, c) {
-        return cljs.core._write.call(null, c, "cljs.core/t6103")
+      cljs.core.t6125.cljs$lang$type = !0;
+      cljs.core.t6125.cljs$lang$ctorStr = "cljs.core/t6125";
+      cljs.core.t6125.cljs$lang$ctorPrWriter = function(b, c) {
+        return cljs.core._write.call(null, c, "cljs.core/t6125")
       };
-      var d = cljs.core.t6103.prototype, f = function(b, c) {
+      var d = cljs.core.t6125.prototype, f = function(b, c) {
         return cljs.core.apply.call(null, b.o, c)
       }, g = function(b, c) {
         var b = this, d = null;
@@ -3418,19 +3418,19 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       g.cljs$core$IFn$_invoke$arity$variadic = f;
       d.call = g;
-      cljs.core.t6103.prototype.apply = function(b, c) {
+      cljs.core.t6125.prototype.apply = function(b, c) {
         b = this;
         return b.call.apply(b, [b].concat(c.slice()))
       };
-      cljs.core.t6103.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t6103.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta6104
+      cljs.core.t6125.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t6125.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta6126
       };
-      cljs.core.t6103.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
-        return new cljs.core.t6103(this.meta, this.o, this.with_meta, c)
+      cljs.core.t6125.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
+        return new cljs.core.t6125(this.meta, this.o, this.with_meta, c)
       }
     }
-    return new cljs.core.t6103(c, b, with_meta, null)
+    return new cljs.core.t6125(c, b, with_meta, null)
   }(), c) : cljs.core._with_meta.call(null, b, c)
 };
 cljs.core.meta = function(a) {
@@ -17685,11 +17685,11 @@ fetch.remotes.remote_callback = function(a, b, c) {
 var livre = {client:{}};
 livre.client.main = {};
 livre.client.main.$controls = jayq.core.$.call(null, "\ufdd0:#controls");
-var group__6013__auto___6029 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+var group__6035__auto___6051 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 livre.client.main.button = function(a) {
   var b = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "\ufdd0:param"), c = cljs.core.get.call(null, b, "\ufdd0:action"), b = cljs.core.get.call(null, b, "\ufdd0:label"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:a.button", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:href", "#", "\ufdd0:data-action", c, "\ufdd0:data-param", a], !0), b], !0));
-  a.setAttribute("crateGroup", group__6013__auto___6029);
+  a.setAttribute("crateGroup", group__6035__auto___6051);
   return a
 };
-livre.client.main.button.prototype._crateGroup = group__6013__auto___6029;
+livre.client.main.button.prototype._crateGroup = group__6035__auto___6051;
 jayq.core.append.call(null, livre.client.main.$controls, livre.client.main.button.call(null, cljs.core.PersistentArrayMap.fromArray("\ufdd0:label;i'm a freaking button;\ufdd0:action;l'accion;\ufdd0:param;40".split(";"), !0)));
