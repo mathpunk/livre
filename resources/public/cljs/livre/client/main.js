@@ -5,16 +5,16 @@ goog.require('jayq.core');
 goog.require('fetch.remotes');
 goog.require('crate.core');
 livre.client.main.$controls = jayq.core.$.call(null,"\uFDD0:#controls");
-var group__6035__auto___6051 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
-livre.client.main.button = (function button(p__6048){
-var map__6050 = p__6048;
-var map__6050__$1 = ((cljs.core.seq_QMARK_.call(null,map__6050))?cljs.core.apply.call(null,cljs.core.hash_map,map__6050):map__6050);
-var param = cljs.core.get.call(null,map__6050__$1,"\uFDD0:param");
-var action = cljs.core.get.call(null,map__6050__$1,"\uFDD0:action");
-var label = cljs.core.get.call(null,map__6050__$1,"\uFDD0:label");
-var elem__6036__auto__ = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0:a.button",cljs.core.PersistentArrayMap.fromArray(["\uFDD0:href","#","\uFDD0:data-action",action,"\uFDD0:data-param",param], true),label], true));
-elem__6036__auto__.setAttribute("crateGroup",group__6035__auto___6051);
-return elem__6036__auto__;
+var group__3572__auto___3588 = cljs.core.swap_BANG_.call(null,crate.core.group_id,cljs.core.inc);
+livre.client.main.button = (function button(p__3585){
+var map__3587 = p__3585;
+var map__3587__$1 = ((cljs.core.seq_QMARK_.call(null,map__3587))?cljs.core.apply.call(null,cljs.core.hash_map,map__3587):map__3587);
+var param = cljs.core.get.call(null,map__3587__$1,"\uFDD0:param");
+var action = cljs.core.get.call(null,map__3587__$1,"\uFDD0:action");
+var label = cljs.core.get.call(null,map__3587__$1,"\uFDD0:label");
+var elem__3573__auto__ = crate.core.html.call(null,cljs.core.PersistentVector.fromArray(["\uFDD0:a.button",cljs.core.PersistentArrayMap.fromArray(["\uFDD0:href","#","\uFDD0:data-action",action,"\uFDD0:data-param",param], true),label], true));
+elem__3573__auto__.setAttribute("crateGroup",group__3572__auto___3588);
+return elem__3573__auto__;
 });
-livre.client.main.button.prototype._crateGroup = group__6035__auto___6051;
+livre.client.main.button.prototype._crateGroup = group__3572__auto___3588;
 jayq.core.append.call(null,livre.client.main.$controls,livre.client.main.button.call(null,cljs.core.PersistentArrayMap.fromArray(["\uFDD0:label","i'm a freaking button","\uFDD0:action","l'accion","\uFDD0:param","40"], true)));

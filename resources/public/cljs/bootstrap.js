@@ -358,6 +358,13 @@ goog.base = function(a, b, c) {
 goog.scope = function(a) {
   a.call(goog.global)
 };
+goog.debug = {};
+goog.debug.Error = function(a) {
+  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
+  a && (this.message = String(a))
+};
+goog.inherits(goog.debug.Error, Error);
+goog.debug.Error.prototype.name = "CustomError";
 goog.string = {};
 goog.string.Unicode = {NBSP:"\u00a0"};
 goog.string.startsWith = function(a, b) {
@@ -687,13 +694,6 @@ goog.string.parseInt = function(a) {
   isFinite(a) && (a = String(a));
   return goog.isString(a) ? /^\s*-?0x/i.test(a) ? parseInt(a, 16) : parseInt(a, 10) : NaN
 };
-goog.debug = {};
-goog.debug.Error = function(a) {
-  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
-  a && (this.message = String(a))
-};
-goog.inherits(goog.debug.Error, Error);
-goog.debug.Error.prototype.name = "CustomError";
 goog.asserts = {};
 goog.asserts.ENABLE_ASSERTS = goog.DEBUG;
 goog.asserts.AssertionError = function(a, b) {
@@ -3389,22 +3389,22 @@ cljs.core.with_meta = function with_meta(b, c) {
   var d = cljs.core.fn_QMARK_.call(null, b);
   d && (d = b ? ((d = b.cljs$lang$protocol_mask$partition0$ & 262144) ? d : b.cljs$core$IWithMeta$) || (b.cljs$lang$protocol_mask$partition0$ ? 0 : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b)) : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b), d = !d);
   return d ? with_meta.call(null, function() {
-    if(void 0 === cljs.core.t6125) {
-      cljs.core.t6125 = {};
-      cljs.core.t6125 = function(b, c, d, e) {
+    if(void 0 === cljs.core.t6170) {
+      cljs.core.t6170 = {};
+      cljs.core.t6170 = function(b, c, d, e) {
         this.meta = b;
         this.o = c;
         this.with_meta = d;
-        this.meta6126 = e;
+        this.meta6171 = e;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t6125.cljs$lang$type = !0;
-      cljs.core.t6125.cljs$lang$ctorStr = "cljs.core/t6125";
-      cljs.core.t6125.cljs$lang$ctorPrWriter = function(b, c) {
-        return cljs.core._write.call(null, c, "cljs.core/t6125")
+      cljs.core.t6170.cljs$lang$type = !0;
+      cljs.core.t6170.cljs$lang$ctorStr = "cljs.core/t6170";
+      cljs.core.t6170.cljs$lang$ctorPrWriter = function(b, c) {
+        return cljs.core._write.call(null, c, "cljs.core/t6170")
       };
-      var d = cljs.core.t6125.prototype, f = function(b, c) {
+      var d = cljs.core.t6170.prototype, f = function(b, c) {
         return cljs.core.apply.call(null, b.o, c)
       }, g = function(b, c) {
         var b = this, d = null;
@@ -3418,19 +3418,19 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       g.cljs$core$IFn$_invoke$arity$variadic = f;
       d.call = g;
-      cljs.core.t6125.prototype.apply = function(b, c) {
+      cljs.core.t6170.prototype.apply = function(b, c) {
         b = this;
         return b.call.apply(b, [b].concat(c.slice()))
       };
-      cljs.core.t6125.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t6125.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta6126
+      cljs.core.t6170.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t6170.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta6171
       };
-      cljs.core.t6125.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
-        return new cljs.core.t6125(this.meta, this.o, this.with_meta, c)
+      cljs.core.t6170.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
+        return new cljs.core.t6170(this.meta, this.o, this.with_meta, c)
       }
     }
-    return new cljs.core.t6125(c, b, with_meta, null)
+    return new cljs.core.t6170(c, b, with_meta, null)
   }(), c) : cljs.core._with_meta.call(null, b, c)
 };
 cljs.core.meta = function(a) {
@@ -12716,6 +12716,122 @@ cljs.core.special_symbol_QMARK_ = function(a) {
   new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, "ns", "ns", -1640528002, null), new cljs.core.Symbol(null, "do", "do", -1640528316, null), new cljs.core.Symbol(null, "fn*", "fn*", -1640430053, null), new cljs.core.Symbol(null, "throw", "throw", -1530191713, null), new cljs.core.Symbol(null, "letfn*", "letfn*", 1548249632, null), new cljs.core.Symbol(null, "js*", "js*", -1640426054, null), new cljs.core.Symbol(null, "defrecord*", "defrecord*", 774272013, null), 
   new cljs.core.Symbol(null, "let*", "let*", -1637213400, null), new cljs.core.Symbol(null, "loop*", "loop*", -1537374273, null), new cljs.core.Symbol(null, "if", "if", -1640528170, null), new cljs.core.Symbol(null, "def", "def", -1640432194, null)]), a)
 };
+var clojure = {string:{}};
+clojure.string.seq_reverse = function(a) {
+  return cljs.core.reduce.call(null, cljs.core.conj, cljs.core.List.EMPTY, a)
+};
+clojure.string.reverse = function(a) {
+  return a.split("").reverse().join("")
+};
+clojure.string.replace = function(a, b, c) {
+  if(cljs.core.string_QMARK_.call(null, b)) {
+    return a.replace(RegExp(goog.string.regExpEscape(b), "g"), c)
+  }
+  if(cljs.core.truth_(b.hasOwnProperty("source"))) {
+    return a.replace(RegExp(b.source, "g"), c)
+  }
+  throw[cljs.core.str("Invalid match arg: "), cljs.core.str(b)].join("");
+};
+clojure.string.replace_first = function(a, b, c) {
+  return a.replace(b, c)
+};
+clojure.string.join = function() {
+  var a = null, b = function(a) {
+    return cljs.core.apply.call(null, cljs.core.str, a)
+  }, c = function(a, b) {
+    return cljs.core.apply.call(null, cljs.core.str, cljs.core.interpose.call(null, a, b))
+  }, a = function(a, e) {
+    switch(arguments.length) {
+      case 1:
+        return b.call(this, a);
+      case 2:
+        return c.call(this, a, e)
+    }
+    throw Error("Invalid arity: " + arguments.length);
+  };
+  a.cljs$core$IFn$_invoke$arity$1 = b;
+  a.cljs$core$IFn$_invoke$arity$2 = c;
+  return a
+}();
+clojure.string.upper_case = function(a) {
+  return a.toUpperCase()
+};
+clojure.string.lower_case = function(a) {
+  return a.toLowerCase()
+};
+clojure.string.capitalize = function(a) {
+  return 2 > cljs.core.count.call(null, a) ? clojure.string.upper_case.call(null, a) : [cljs.core.str(clojure.string.upper_case.call(null, cljs.core.subs.call(null, a, 0, 1))), cljs.core.str(clojure.string.lower_case.call(null, cljs.core.subs.call(null, a, 1)))].join("")
+};
+clojure.string.split = function() {
+  var a = null, b = function(a, b) {
+    return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
+  }, c = function(a, b, c) {
+    if(1 > c) {
+      return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
+    }
+    for(var g = cljs.core.PersistentVector.EMPTY;;) {
+      if(cljs.core._EQ_.call(null, c, 1)) {
+        return cljs.core.conj.call(null, g, a)
+      }
+      var h = cljs.core.re_find.call(null, b, a);
+      if(cljs.core.truth_(h)) {
+        var i = h, h = a.indexOf(i), i = a.substring(h + cljs.core.count.call(null, i)), c = c - 1, g = cljs.core.conj.call(null, g, a.substring(0, h)), a = i
+      }else {
+        return cljs.core.conj.call(null, g, a)
+      }
+    }
+  }, a = function(a, e, f) {
+    switch(arguments.length) {
+      case 2:
+        return b.call(this, a, e);
+      case 3:
+        return c.call(this, a, e, f)
+    }
+    throw Error("Invalid arity: " + arguments.length);
+  };
+  a.cljs$core$IFn$_invoke$arity$2 = b;
+  a.cljs$core$IFn$_invoke$arity$3 = c;
+  return a
+}();
+clojure.string.split_lines = function(a) {
+  return clojure.string.split.call(null, a, /\n|\r\n/)
+};
+clojure.string.trim = function(a) {
+  return goog.string.trim(a)
+};
+clojure.string.triml = function(a) {
+  return goog.string.trimLeft(a)
+};
+clojure.string.trimr = function(a) {
+  return goog.string.trimRight(a)
+};
+clojure.string.trim_newline = function(a) {
+  for(var b = a.length;;) {
+    if(0 === b) {
+      return""
+    }
+    var c = cljs.core.get.call(null, a, b - 1);
+    var d = cljs.core._EQ_.call(null, c, "\n"), c = d ? d : cljs.core._EQ_.call(null, c, "\r");
+    if(c) {
+      b -= 1
+    }else {
+      return a.substring(0, b)
+    }
+  }
+};
+clojure.string.blank_QMARK_ = function(a) {
+  return goog.string.isEmptySafe(a)
+};
+clojure.string.escape = function(a, b) {
+  for(var c = new goog.string.StringBuffer, d = a.length, e = 0;;) {
+    if(cljs.core._EQ_.call(null, d, e)) {
+      return c.toString()
+    }
+    var f = a.charAt(e), g = cljs.core.get.call(null, b, f);
+    cljs.core.truth_(g) ? c.append("" + cljs.core.str(g)) : c.append(f);
+    e += 1
+  }
+};
 goog.userAgent = {};
 goog.userAgent.ASSUME_IE = !1;
 goog.userAgent.ASSUME_GECKO = !1;
@@ -13729,122 +13845,6 @@ goog.dom.DomHelper.prototype.isNodeList = goog.dom.isNodeList;
 goog.dom.DomHelper.prototype.getAncestorByTagNameAndClass = goog.dom.getAncestorByTagNameAndClass;
 goog.dom.DomHelper.prototype.getAncestorByClass = goog.dom.getAncestorByClass;
 goog.dom.DomHelper.prototype.getAncestor = goog.dom.getAncestor;
-var clojure = {string:{}};
-clojure.string.seq_reverse = function(a) {
-  return cljs.core.reduce.call(null, cljs.core.conj, cljs.core.List.EMPTY, a)
-};
-clojure.string.reverse = function(a) {
-  return a.split("").reverse().join("")
-};
-clojure.string.replace = function(a, b, c) {
-  if(cljs.core.string_QMARK_.call(null, b)) {
-    return a.replace(RegExp(goog.string.regExpEscape(b), "g"), c)
-  }
-  if(cljs.core.truth_(b.hasOwnProperty("source"))) {
-    return a.replace(RegExp(b.source, "g"), c)
-  }
-  throw[cljs.core.str("Invalid match arg: "), cljs.core.str(b)].join("");
-};
-clojure.string.replace_first = function(a, b, c) {
-  return a.replace(b, c)
-};
-clojure.string.join = function() {
-  var a = null, b = function(a) {
-    return cljs.core.apply.call(null, cljs.core.str, a)
-  }, c = function(a, b) {
-    return cljs.core.apply.call(null, cljs.core.str, cljs.core.interpose.call(null, a, b))
-  }, a = function(a, e) {
-    switch(arguments.length) {
-      case 1:
-        return b.call(this, a);
-      case 2:
-        return c.call(this, a, e)
-    }
-    throw Error("Invalid arity: " + arguments.length);
-  };
-  a.cljs$core$IFn$_invoke$arity$1 = b;
-  a.cljs$core$IFn$_invoke$arity$2 = c;
-  return a
-}();
-clojure.string.upper_case = function(a) {
-  return a.toUpperCase()
-};
-clojure.string.lower_case = function(a) {
-  return a.toLowerCase()
-};
-clojure.string.capitalize = function(a) {
-  return 2 > cljs.core.count.call(null, a) ? clojure.string.upper_case.call(null, a) : [cljs.core.str(clojure.string.upper_case.call(null, cljs.core.subs.call(null, a, 0, 1))), cljs.core.str(clojure.string.lower_case.call(null, cljs.core.subs.call(null, a, 1)))].join("")
-};
-clojure.string.split = function() {
-  var a = null, b = function(a, b) {
-    return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
-  }, c = function(a, b, c) {
-    if(1 > c) {
-      return cljs.core.vec.call(null, ("" + cljs.core.str(a)).split(b))
-    }
-    for(var g = cljs.core.PersistentVector.EMPTY;;) {
-      if(cljs.core._EQ_.call(null, c, 1)) {
-        return cljs.core.conj.call(null, g, a)
-      }
-      var h = cljs.core.re_find.call(null, b, a);
-      if(cljs.core.truth_(h)) {
-        var i = h, h = a.indexOf(i), i = a.substring(h + cljs.core.count.call(null, i)), c = c - 1, g = cljs.core.conj.call(null, g, a.substring(0, h)), a = i
-      }else {
-        return cljs.core.conj.call(null, g, a)
-      }
-    }
-  }, a = function(a, e, f) {
-    switch(arguments.length) {
-      case 2:
-        return b.call(this, a, e);
-      case 3:
-        return c.call(this, a, e, f)
-    }
-    throw Error("Invalid arity: " + arguments.length);
-  };
-  a.cljs$core$IFn$_invoke$arity$2 = b;
-  a.cljs$core$IFn$_invoke$arity$3 = c;
-  return a
-}();
-clojure.string.split_lines = function(a) {
-  return clojure.string.split.call(null, a, /\n|\r\n/)
-};
-clojure.string.trim = function(a) {
-  return goog.string.trim(a)
-};
-clojure.string.triml = function(a) {
-  return goog.string.trimLeft(a)
-};
-clojure.string.trimr = function(a) {
-  return goog.string.trimRight(a)
-};
-clojure.string.trim_newline = function(a) {
-  for(var b = a.length;;) {
-    if(0 === b) {
-      return""
-    }
-    var c = cljs.core.get.call(null, a, b - 1);
-    var d = cljs.core._EQ_.call(null, c, "\n"), c = d ? d : cljs.core._EQ_.call(null, c, "\r");
-    if(c) {
-      b -= 1
-    }else {
-      return a.substring(0, b)
-    }
-  }
-};
-clojure.string.blank_QMARK_ = function(a) {
-  return goog.string.isEmptySafe(a)
-};
-clojure.string.escape = function(a, b) {
-  for(var c = new goog.string.StringBuffer, d = a.length, e = 0;;) {
-    if(cljs.core._EQ_.call(null, d, e)) {
-      return c.toString()
-    }
-    var f = a.charAt(e), g = cljs.core.get.call(null, b, f);
-    cljs.core.truth_(g) ? c.append("" + cljs.core.str(g)) : c.append(f);
-    e += 1
-  }
-};
 var crate = {core:{}};
 crate.core.xmlns = cljs.core.PersistentArrayMap.fromArray(["\ufdd0:xhtml", "http://www.w3.org/1999/xhtml", "\ufdd0:svg", "http://www.w3.org/2000/svg"], !0);
 crate.core.elem_id = cljs.core.atom.call(null, 0);
@@ -15921,13 +15921,41 @@ goog.Uri.QueryData.prototype.extend = function(a) {
     }, this)
   }
 };
-var fetch = {util:{}};
-fetch.util.clj__GT_js = function clj__GT_js(b) {
-  return cljs.core.string_QMARK_.call(null, b) ? b : cljs.core.keyword_QMARK_.call(null, b) ? cljs.core.name.call(null, b) : cljs.core.map_QMARK_.call(null, b) ? cljs.core.reduce.call(null, function(b, d) {
-    var e = cljs.core.nth.call(null, d, 0, null), f = cljs.core.nth.call(null, d, 1, null);
-    return cljs.core.assoc.call(null, b, clj__GT_js.call(null, e), clj__GT_js.call(null, f))
-  }, cljs.core.ObjMap.EMPTY, b).strobj : cljs.core.coll_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.array, cljs.core.map.call(null, clj__GT_js, b)) : b
+goog.debug.entryPointRegistry = {};
+goog.debug.EntryPointMonitor = function() {
 };
+goog.debug.entryPointRegistry.refList_ = [];
+goog.debug.entryPointRegistry.monitors_ = [];
+goog.debug.entryPointRegistry.monitorsMayExist_ = !1;
+goog.debug.entryPointRegistry.register = function(a) {
+  goog.debug.entryPointRegistry.refList_[goog.debug.entryPointRegistry.refList_.length] = a;
+  if(goog.debug.entryPointRegistry.monitorsMayExist_) {
+    for(var b = goog.debug.entryPointRegistry.monitors_, c = 0;c < b.length;c++) {
+      a(goog.bind(b[c].wrap, b[c]))
+    }
+  }
+};
+goog.debug.entryPointRegistry.monitorAll = function(a) {
+  goog.debug.entryPointRegistry.monitorsMayExist_ = !0;
+  for(var b = goog.bind(a.wrap, a), c = 0;c < goog.debug.entryPointRegistry.refList_.length;c++) {
+    goog.debug.entryPointRegistry.refList_[c](b)
+  }
+  goog.debug.entryPointRegistry.monitors_.push(a)
+};
+goog.debug.entryPointRegistry.unmonitorAllIfPossible = function(a) {
+  var b = goog.debug.entryPointRegistry.monitors_;
+  goog.asserts.assert(a == b[b.length - 1], "Only the most recent monitor can be unwrapped.");
+  for(var a = goog.bind(a.unwrap, a), c = 0;c < goog.debug.entryPointRegistry.refList_.length;c++) {
+    goog.debug.entryPointRegistry.refList_[c](a)
+  }
+  b.length--
+};
+goog.debug.errorHandlerWeakDep = {protectEntryPoint:function(a) {
+  return a
+}};
+goog.events = {};
+goog.events.BrowserFeature = {HAS_W3C_BUTTON:!goog.userAgent.IE || goog.userAgent.isDocumentMode(9), HAS_W3C_EVENT_SUPPORT:!goog.userAgent.IE || goog.userAgent.isDocumentMode(9), SET_KEY_CODE_TO_PREVENT_DEFAULT:goog.userAgent.IE && !goog.userAgent.isVersion("8"), HAS_NAVIGATOR_ONLINE_PROPERTY:!goog.userAgent.WEBKIT || goog.userAgent.isVersion("528"), HAS_HTML5_NETWORK_EVENT_SUPPORT:goog.userAgent.GECKO && goog.userAgent.isVersion("1.9b") || goog.userAgent.IE && goog.userAgent.isVersion("8") || goog.userAgent.OPERA && 
+goog.userAgent.isVersion("9.5") || goog.userAgent.WEBKIT && goog.userAgent.isVersion("528"), HTML5_NETWORK_EVENTS_FIRE_ON_BODY:goog.userAgent.GECKO && !goog.userAgent.isVersion("8") || goog.userAgent.IE && !goog.userAgent.isVersion("9")};
 goog.disposable = {};
 goog.disposable.IDisposable = function() {
 };
@@ -15989,41 +16017,6 @@ goog.disposeAll = function(a) {
     goog.isArrayLike(d) ? goog.disposeAll.apply(null, d) : goog.dispose(d)
   }
 };
-goog.debug.entryPointRegistry = {};
-goog.debug.EntryPointMonitor = function() {
-};
-goog.debug.entryPointRegistry.refList_ = [];
-goog.debug.entryPointRegistry.monitors_ = [];
-goog.debug.entryPointRegistry.monitorsMayExist_ = !1;
-goog.debug.entryPointRegistry.register = function(a) {
-  goog.debug.entryPointRegistry.refList_[goog.debug.entryPointRegistry.refList_.length] = a;
-  if(goog.debug.entryPointRegistry.monitorsMayExist_) {
-    for(var b = goog.debug.entryPointRegistry.monitors_, c = 0;c < b.length;c++) {
-      a(goog.bind(b[c].wrap, b[c]))
-    }
-  }
-};
-goog.debug.entryPointRegistry.monitorAll = function(a) {
-  goog.debug.entryPointRegistry.monitorsMayExist_ = !0;
-  for(var b = goog.bind(a.wrap, a), c = 0;c < goog.debug.entryPointRegistry.refList_.length;c++) {
-    goog.debug.entryPointRegistry.refList_[c](b)
-  }
-  goog.debug.entryPointRegistry.monitors_.push(a)
-};
-goog.debug.entryPointRegistry.unmonitorAllIfPossible = function(a) {
-  var b = goog.debug.entryPointRegistry.monitors_;
-  goog.asserts.assert(a == b[b.length - 1], "Only the most recent monitor can be unwrapped.");
-  for(var a = goog.bind(a.unwrap, a), c = 0;c < goog.debug.entryPointRegistry.refList_.length;c++) {
-    goog.debug.entryPointRegistry.refList_[c](a)
-  }
-  b.length--
-};
-goog.debug.errorHandlerWeakDep = {protectEntryPoint:function(a) {
-  return a
-}};
-goog.events = {};
-goog.events.BrowserFeature = {HAS_W3C_BUTTON:!goog.userAgent.IE || goog.userAgent.isDocumentMode(9), HAS_W3C_EVENT_SUPPORT:!goog.userAgent.IE || goog.userAgent.isDocumentMode(9), SET_KEY_CODE_TO_PREVENT_DEFAULT:goog.userAgent.IE && !goog.userAgent.isVersion("8"), HAS_NAVIGATOR_ONLINE_PROPERTY:!goog.userAgent.WEBKIT || goog.userAgent.isVersion("528"), HAS_HTML5_NETWORK_EVENT_SUPPORT:goog.userAgent.GECKO && goog.userAgent.isVersion("1.9b") || goog.userAgent.IE && goog.userAgent.isVersion("8") || goog.userAgent.OPERA && 
-goog.userAgent.isVersion("9.5") || goog.userAgent.WEBKIT && goog.userAgent.isVersion("528"), HTML5_NETWORK_EVENTS_FIRE_ON_BODY:goog.userAgent.GECKO && !goog.userAgent.isVersion("8") || goog.userAgent.IE && !goog.userAgent.isVersion("9")};
 goog.events.Event = function(a, b) {
   this.type = a;
   this.currentTarget = this.target = b
@@ -16514,6 +16507,13 @@ goog.events.getUniqueId = function(a) {
 goog.debug.entryPointRegistry.register(function(a) {
   goog.events.handleBrowserEvent_ = a(goog.events.handleBrowserEvent_)
 });
+var fetch = {util:{}};
+fetch.util.clj__GT_js = function clj__GT_js(b) {
+  return cljs.core.string_QMARK_.call(null, b) ? b : cljs.core.keyword_QMARK_.call(null, b) ? cljs.core.name.call(null, b) : cljs.core.map_QMARK_.call(null, b) ? cljs.core.reduce.call(null, function(b, d) {
+    var e = cljs.core.nth.call(null, d, 0, null), f = cljs.core.nth.call(null, d, 1, null);
+    return cljs.core.assoc.call(null, b, clj__GT_js.call(null, e), clj__GT_js.call(null, f))
+  }, cljs.core.ObjMap.EMPTY, b).strobj : cljs.core.coll_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.array, cljs.core.map.call(null, clj__GT_js, b)) : b
+};
 goog.events.EventTarget = function() {
   goog.Disposable.call(this)
 };
@@ -17685,11 +17685,11 @@ fetch.remotes.remote_callback = function(a, b, c) {
 var livre = {client:{}};
 livre.client.main = {};
 livre.client.main.$controls = jayq.core.$.call(null, "\ufdd0:#controls");
-var group__6035__auto___6051 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
+var group__3572__auto___3588 = cljs.core.swap_BANG_.call(null, crate.core.group_id, cljs.core.inc);
 livre.client.main.button = function(a) {
   var b = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, a = cljs.core.get.call(null, b, "\ufdd0:param"), c = cljs.core.get.call(null, b, "\ufdd0:action"), b = cljs.core.get.call(null, b, "\ufdd0:label"), a = crate.core.html.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:a.button", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:href", "#", "\ufdd0:data-action", c, "\ufdd0:data-param", a], !0), b], !0));
-  a.setAttribute("crateGroup", group__6035__auto___6051);
+  a.setAttribute("crateGroup", group__3572__auto___3588);
   return a
 };
-livre.client.main.button.prototype._crateGroup = group__6035__auto___6051;
+livre.client.main.button.prototype._crateGroup = group__3572__auto___3588;
 jayq.core.append.call(null, livre.client.main.$controls, livre.client.main.button.call(null, cljs.core.PersistentArrayMap.fromArray("\ufdd0:label;i'm a freaking button;\ufdd0:action;l'accion;\ufdd0:param;40".split(";"), !0)));
