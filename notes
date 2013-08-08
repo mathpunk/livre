@@ -9,3 +9,13 @@ test data
 marshalling in clojure
   pickle?
   file with strings?
+;;;;;;;;;;;;;;; FUTURE
+(def $results-words ($ :#results-words))    ; right
+(def $table ($ :#results))
+(def $results-art ($ :#results-art))        ; left
+; # iteration 1
+; it returns the same picture of an x in sharpie
+; # iteration 2
+; it returns a lot of different sharpies
+; # iteration n
+; it returns art based on contextual search

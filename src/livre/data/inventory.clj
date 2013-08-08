@@ -1,3 +1,30 @@
+
+
+
+
+the tag
+com.punkmathematics.livre/inventory livre.data.inventory/read     ; /read-dir 
+
+resolves to
+livre.data.inventory/read
+
+
+
+
+writer 
+builds com.pm.blahblah data
+
+reader
+reads com.pm.blahblah data
+
+there are two contracts going on there-- the app, and the writespace
+
+; depending on what i need to do to get it done in the moment, 
+; treat your thing as a single thing until/unless it becomes apparent that there's a place
+; to fissure it, to drop a membrane between the two.
+;
+; no, you always drop a membrane, right? what are your interfaces is what i'm trying to say, your protocols.
+;
 (ns data.edn.dir
   (:require [clojure.edn :as edn]))
 
