@@ -1,6 +1,7 @@
 (ns livre.data.inventory
   (:require [clojure.edn :as edn]))
 
+; # thrower
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -30,3 +31,24 @@
 ; test
 (def testdir "/home/thomas/cerebra/wiki/alg")
 (dir-thrower testdir)
+
+
+
+; # counter
+; UGH now i have to go learn polymorphism
+
+(defn count-units [this] "many")
+
+;   "Communicates with the server to get counts of resources and a last-modified estimate."
+;         (common/layout
+;           [:div#statistics 
+;            [:p "word count: " (str "lots")]
+;            [:p "index cards: " (str 142)]
+;            [:p "notebook pages: " (str 1686)]
+;            [:p "web clippings: " (str "parsing")]
+;            ])
+;  )
+
+
+
+
