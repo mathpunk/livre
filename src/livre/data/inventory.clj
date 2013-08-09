@@ -21,11 +21,8 @@
 (defn dir-thrower [dirname]
   (let [values (transform-text-directory-to-values dirname) 
         tag "#com.punkmathematics.livre/inventory "         
-        ; whaaaaaaaaaaaaaaaaaaaaaaaaaaaaat??????????????????????????????????????
         dir (clojure.java.io/file dirname)
-        ; how many times were you planning on accessing that dir? dir dir dir
         output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
-        ; this.... yeah. don't laugh it works.
         (map #(spit output-file % :append true) (map #(str tag % "\n") values))
     )
   )
