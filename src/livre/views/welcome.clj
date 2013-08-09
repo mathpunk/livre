@@ -3,31 +3,33 @@
   (:use [noir.core :only [defpage]]
         [noir.fetch.remotes :only [defremote]]))
 
+; landing page
 (defpage "/" []
          (common/layout
-           [:p "Welcome to livre"]))
+           [:p "the PM bookserver"]))
 
+; statistics
 (defpage "/statistics" []
-  "Communicates with the server to get a lastModified value and counts."
-         (common/layout
-           [:div#statistics 
-            [:p "word count: " (str 455251)]
-            [:p "index cards: " (str 1142)]
+  "Communicates with the server to get counts of resources and a last-modified estimate."
+        (common/layout
+          [:div#statistics 
+            [:p "word count: " (str "lots")]
+            [:p "index cards: " (str 142)]
             [:p "notebook pages: " (str 1686)]
             [:p "web clippings: " (str "parsing")]
            ]
-           [:div#graph
-            
-           ]
-          ))
-
-;; buttons and such
-(defpage "/builder" [ ]
-  (common/layout
-    [:div#controls
-     [:p "I wish I were a piano"]]
-    ))
+          )
+  )
 
 (defremote count-something [n]
   (println "One number you can count to is" n))
 
+
+; builder
+(defpage "/builder" [ ]
+  (common/layout
+    [:div#builder
+     [:p "search and organize resources into stories"]
+    ]
+    )
+  )
