@@ -1,16 +1,3 @@
-; {
-; data-readers: 
-; com.punkmathematics.livre/story    livre.client.story/???
-; com.punkmathematics.livre/builder  livre.client.builder/???
-; com.punkmathematics.livre/edit     livre.data.facts/???
-; }
-;
-; }
-; data-writers:
-; #com.punkmathematics.livre/inventory 
-; #com.punkmathematics.livre/story
-; }
-
 (ns livre.data.inventory
   (:require [clojure.edn :as edn]))
 
@@ -37,19 +24,19 @@
   )
 
 (defn- dir-thrower [dirname]
-  ; /home/thomas/cerebra/wiki
-  ; /home/thomas/cerebra/wiki/wiki-archive
   ; write to a file.... with tags?
   ; why tags? 
-  (let [values (transform-text-directory-to-values dirname)
-        tag "#com.punkmathematics.livre/inventory "
+  (let [values (transform-text-directory-to-values dirname) 
+        tag "#com.punkmathematics.livre/inventory "         
         dir (clojure.java.io/file dirname)
         output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
-    (spit output-file (mapcat #(str tag %) values))
+       (spit output-file (map #(str tag %) values))
     )
   )
 
 (dir-thrower (first ((config :archives) :directories)))
+
+(first ((config :archives) :directories))
 
 (defn archive [ ]
   "Take archived directories and home directory + namespaces from config,
@@ -111,4 +98,19 @@
   Writespace
   (ws [ ] "all")
   (home [ ] (config :directory))
+
+
+
+; {
+; data-readers: 
+; com.punkmathematics.livre/story    livre.client.story/???
+; com.punkmathematics.livre/builder  livre.client.builder/???
+; com.punkmathematics.livre/edit     livre.data.facts/???
+; }
+;
+; }
+; data-writers:
+; #com.punkmathematics.livre/inventory 
+; #com.punkmathematics.livre/story
+; }
 
