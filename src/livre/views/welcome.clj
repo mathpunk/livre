@@ -1,18 +1,14 @@
 (ns livre.views.welcome
   (:require [livre.views.common :as common])
-  (:use [noir.core :only [defpage]]))
+  (:use [noir.core :only [defpage]]
+        [noir.fetch.remotes :only [defremote]]))
 
 (defpage "/" []
          (common/layout
            [:p "Welcome to livre"]))
 
-(defpage "/partial-ordure" [ ]
-  (common/layout
-    [:div#controls
-     [:p "I wish I were a piano"]]
-    ))
-
 (defpage "/statistics" []
+  "Communicates with the server to get a lastModified value and counts."
          (common/layout
            [:div#statistics 
             [:p "word count: " (str 455251)]
@@ -25,19 +21,13 @@
            ]
           ))
 
-(defpage "/css-viewer" [ ]
+;; buttons and such
+(defpage "/builder" [ ]
   (common/layout
-    [:nav "nav"]
-    [:div#wrapper "#wrapper"
-      [:div#alert ".alert" ]
-      [:div#main 
-        [:p "#main"]
-        [:p "Look I've got " [:a {:href "omgbutts.com"}]]
-        [:div#cont-wrapper "#cont-wrapper"]
-        [:div#comments "#comments"]
-        [:div#wp_paypal_shopping_cart_widgets "#wp_paypal_shopping_cart_widgets"]
-        ]
-    ]
-    [:footer "footer"]
-  ))
+    [:div#controls
+     [:p "I wish I were a piano"]]
+    ))
+
+(defremote count-something [n]
+  (println "One number you can count to is" n))
 

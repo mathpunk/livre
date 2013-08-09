@@ -13,10 +13,10 @@
 
 (append $controls (button {:label "count something" 
                            :action "count-something" 
-                           :param "rand"}))
+                           :param "40"}))
 
 (delegate $body button :click
                     (fn [e]
                         (.preventDefault e)
-                        (js/alert "clicked!")))
+                        ))
 

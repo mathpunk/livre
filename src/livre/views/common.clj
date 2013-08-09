@@ -5,7 +5,7 @@
 (def pages
      [[:li [:a {:href "http://localhost:8080/"} "about"]]
       [:li [:a {:href "http://localhost:8080/statistics"} "numbers"]] 
-      [:li [:a {:href "http://localhost:8080/partial-ordure"} "ordering"]]
+      [:li [:a {:href "http://localhost:8080/builder"} "ordering"]]
      ]
   )
 
@@ -21,3 +21,6 @@
         [:div#wrapper
         content]
         (include-js "/cljs/bootstrap.js")]))
+
+; put in a footer, it looks nice
+;    [:footer "footer"]
