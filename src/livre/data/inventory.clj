@@ -17,51 +17,8 @@
 ; /configure
 (def config (clojure.edn/read-string  (slurp "/home/thomas/src/livre/config.clj") ))
 
-; for reference, the last value of config. dangerous obvsly.
-{ 
-  :home "/home/thomas/cerebra/wiki"             ; your home is private, obvsly,
-                                                ; but you can let who you want in.
-
-  :writespaces ["pm", "lf5", "livre", "alg"]    ; subdirs in home that are for 
-                                                ; projectifying
- 
-  :archives {                                   ; to import things that aren't
-                                                ; being developed? or that have
-                                                ; record types set up? I dunno.
-    :directories [
-                    "/home/thomas/cerebra/wiki/wiki-archive/early-pm-wiki"
-                  ; "/home/thomas/cerebra/wiki/wiki-archive/wiki-backup"
-                  ; "/home/thomas/cerebra/wiki/wiki-archive/vim-wiki"
-                  ]
-    :twitter nil
-    :en nil 
-     }
-}
-
 
 ; /archive
-(defn- dir-thrower [dirname]
-  ; /home/thomas/cerebra/wiki
-  ; /home/thomas/cerebra/wiki/wiki-archive
-  ; write to a file.... with tags?
-  ; why tags? 
-  (let [values (transform-text-directory-to-values dirname)
-        tag "#com.punkmathematics.livre/inventory "
-        dir (clojure.java.io/file dirname)
-        output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
-
-    (spit output-file (mapcat #(str tag %) values))
-    
-    )
-  )
-
-(defn- transform-text-directory-to-values [dirname]
-  (let [dir (clojure.java.io/file dirname),
-        files (filter #(.isFile %) (file-seq dir))]
-      (set (map value-of-a-text-file (remove #(.isHidden %) files)))
-    )
-  )
-
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -71,6 +28,28 @@
        :history     [{:tx (.lastModified file) :diff nil}]
       }
   )
+
+(defn- transform-text-directory-to-values [dirname]
+  (let [dir (clojure.java.io/file dirname),
+        files (filter #(.isFile %) (file-seq dir))]
+      (set (map value-of-a-text-file (remove #(.isHidden %) files)))
+    )
+  )
+
+(defn- dir-thrower [dirname]
+  ; /home/thomas/cerebra/wiki
+  ; /home/thomas/cerebra/wiki/wiki-archive
+  ; write to a file.... with tags?
+  ; why tags? 
+  (let [values (transform-text-directory-to-values dirname)
+        tag "#com.punkmathematics.livre/inventory "
+        dir (clojure.java.io/file dirname)
+        output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
+    (spit output-file (mapcat #(str tag %) values))
+    )
+  )
+
+(dir-thrower (first ((config :archives) :directories)))
 
 (defn archive [ ]
   "Take archived directories and home directory + namespaces from config,
