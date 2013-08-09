@@ -1,7 +1,6 @@
 (ns livre.views.common
   (:use [noir.core :only [defpartial]]
         [hiccup.page :only [include-css include-js html5]]))
-; overtonecljs ; [hiccup.page-helpers :only [include-css include-js html5]]))
 
 (def pages
      [[:li [:a {:href "http://localhost:8080/"} "about"]]
@@ -9,7 +8,6 @@
       [:li [:a {:href "http://localhost:8080/partial-ordure"} "ordering"]]
      ]
   )
-  
 
 (defpartial layout [& content]
     (html5
