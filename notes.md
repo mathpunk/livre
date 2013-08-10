@@ -265,4 +265,18 @@ been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't
 closer at the projects.clj file...
 
 
+livre.server.server*        ; change ./project.clj
+livre.server.inventory*
+livre.server.storage
+livre.server.authentication
 
+livre.topology.units
+- protocol or multi
+- work out on cards
+
+livre.client.main*
+livre.client.tattler
+livre.client.builder
+livre.client.editor
+
+* -exists
