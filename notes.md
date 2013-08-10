@@ -216,3 +216,53 @@ db
   
 http
   i can make a localhost but dunno how to route
+
+
+# journal
+
+--------------------------------------------------------------
+Sat Aug 10 13:51:56 PDT 2013
+
+current
+/home/thomas/src/livre/src/livre/
+├── analysis
+│   ├── analysis.clj
+│   ├── words.clj
+│   └── words.txt
+├── api.clj
+├── client
+│   ├── art.clj
+│   ├── dashboard.clj
+│   ├── main.cljs
+│   └── roles.clj
+├── config.clj
+├── controllers
+│   ├── common.clj
+│   └── search.clj
+├── data
+│   ├── data_readers.clj
+│   ├── glitch.clj
+│   ├── inventory.clj
+│   ├── transformations.clj
+│   └── util
+│       └── diff.clj
+├── routes.clj
+├── server.clj
+├── topology
+│   ├── archive_goals.clj
+│   ├── objects.clj
+│   └── object-topology.clj
+├── ui
+│   ├── client -> ../client
+│   ├── server.clj -> ../server.clj
+│   └── views -> ../views
+└── views
+    ├── common.clj
+    └── welcome.clj
+
+what I'm thinking about now is, how can I refactor this directory tree to better represent this notes document I've just 
+been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't understand? I think by looking a bit
+closer at the projects.clj file...
+
+
+
