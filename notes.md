@@ -207,6 +207,7 @@ measure
 
   
 # services
+
 get correct permissions to collaborators
 
 github?
@@ -216,6 +217,7 @@ db
   
 http
   i can make a localhost but dunno how to route
+
 
 
 # journal
@@ -270,13 +272,13 @@ livre.server.inventory*
 livre.server.storage
 livre.server.authentication
 
-livre.topology.units
-- protocol or multi
-- work out on cards
+livre.topology.atomic
+livre.topology.structure
+- work out multi/protocol on cards to learn the desired inheritance tree
+
 
 livre.client.main*
 livre.client.tattler
 livre.client.builder
 livre.client.editor
 
-* -exists
