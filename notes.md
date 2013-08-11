@@ -266,7 +266,6 @@ what I'm thinking about now is, how can I refactor this directory tree to better
 been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't understand? I think by looking a bit
 closer at the projects.clj file...
 
-
 livre.server.server*        ; change ./project.clj
 livre.server.inventory*
 livre.server.storage
@@ -275,7 +274,6 @@ livre.server.authentication
 livre.topology.atomic
 livre.topology.structure
 - work out multi/protocol on cards to learn the desired inheritance tree
-
 
 livre.client.main*
 livre.client.tattler
@@ -459,3 +457,57 @@ analysis/analysis.clj
     └── welcome.clj
 
 9 directories, 17 files
+
+
+
+## data-readers
+
+The reason for is that they allow for data to be delivered to a clever function to do stuff to it right 
+when it arrives, before it even hits the compiler. 
+
+The reason against is, the only thing I can think of right now is passing that thing along as a value. But, 
+with some thought to semantics, and some working functions, I bet I can think of something useful to do
+as a datom comes in. 
+
+
+{ 
+; data-readers: 
+; com.punkmathematics.livre/story    livre.client.story/???
+; com.punkmathematics.livre/builder  livre.client.builder/???
+; com.punkmathematics.livre/edit     livre.data.facts/???
+;
+; data-writers:
+; com.punkmathematics.livre/inventory 
+; com.punkmathematics.livre/story
+ }
+
+
+
+
+; relevant docs:
+;   *data-readers*
+
+; When Clojure starts, it searches for files named 'data_readers.clj'
+; at the root of the classpath. Each such file must contain a literal
+; map of symbols, like this:
+;
+;     {foo/bar my.project.foo/bar
+;      foo/baz my.project/baz}
+;
+; The first symbol in each pair is a tag that will be recognized by
+; the Clojure reader. The second symbol in the pair is the
+; fully-qualified name of a Var which will be invoked by the reader to
+; parse the form following the tag. For example, given the
+; data_readers.clj file above, the Clojure reader would parse this
+; form:
+;
+;     #foo/bar [1 2 3]
+;
+; by invoking the Var #'my.project.foo/bar on the vector [1 2 3]. The
+; data reader function is invoked on the form AFTER it has been read
+; as a normal Clojure data structure by the reader.
+;
+; Reader tags without namespace qualifiers are reserved for
+; Clojure. Default reader tags are defined in
+; clojure.core/default-data-readers but may be overridden in
+; data_readers.clj or by rebinding this Var.
