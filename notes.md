@@ -282,3 +282,180 @@ livre.client.tattler
 livre.client.builder
 livre.client.editor
 
+# old specs
+
+some may have some utility, i guess?
+
+
+
+
+analysis/analysis.clj
+;; looking for and handling aliases
+(ns livre.copy.aliases)
+
+(def known-aliases
+  #{
+    #"<<.+>>",
+    #"((.+))",
+    #"^---",
+    "see also: 'sigils' files" }
+  )
+
+
+(ns livre.copy.hierarchy)
+;; We know that textons are a directed graph, not a tree.
+;; However, since it's so simple to turn a linear (scroll) document into an outline,
+;; we propose that the tree structure is a useful "local understanding" structure for writing.
+;;
+;; Here, the goal will be to
+;;   change bad markdown (vimwiki 'equals' syntax)
+;;   find top-level headings and their body
+;;   find nth-level headings and their body
+;;   build a data structure
+;;   "qualify the namespace" with the name of the file plus these hierarchical words and phrases
+
+
+;; managing resources
+
+(ns livre.material.morgue)
+;; there are notebook names, which (kind of) relate to project/workspace/namespaces
+;; there are tags to count up
+;; there are short urls to correct
+;; there is faceting to do--
+;;   by date
+;;   by twitter-user
+;;   by full text search
+;;   by tag
+## analysis/words.clj
+;; word functions
+;;
+
+
+(ns livre.words.wordnik)
+(def my-wordnik-key "fe13b068fae9104fa90000d481c035c96157a13f3ca6f2ef9")
+(def word-base "http://developer.wordnik.com/v4/word.json/" )
+(def key-param
+  (str "&api_key=" my-wordnik-key))
+
+(ns livre.words.wordnik.api)
+;; api calls of interest
+; /word.json/{word}/definitions
+; /word.json/{word}/topExample
+; /word.json/{word}/relatedWords
+; /word.json/{word}/etymologies
+(defn wordnik-request [name word]                                     ; should be, like, define api call?
+  (str wordnik-base-url name api-key-uri))
+
+
+(ns livre.words)
+(defn etymology
+  "Get an etymology (or etymologies) from the Wordnik api."
+  ([word]
+   ;; bind default parameters
+   ;; call 2-arity function
+  ([word params])
+   ;; form request
+   ;; build and return data structure
+   )
+  )
+
+(defn definition
+  "Get a definition (or definitions) from the Wordnik api."
+  ([word]
+   ;; bind default parameters
+   ;; call 2-arity function
+  ([word params])
+   ;; form request
+   ;; build and return data structure
+  )
+ )
+
+(defn phrase? [texton]
+  ;; has spaces
+  )
+
+;; defn doallwords [phrase]
+
+(ns livre.words.lexicon)
+;; find and use private definitions and clips -- i.e., vimwiki pages with word/phrase names
+
+
+
+## art.clj
+(ns livre.art.flickr)
+
+;; Given a word, grab a CC image result from Flickr
+
+;; key:
+;; 75ad122e2302dcd7b618ac038a28c672
+;; Secret:
+;; d79b91067ba66bef
+
+;; search photos by criteria, including tags, and with some fanciness, geo
+;; http://www.flickr.com/services/api/flickr.photos.search.html
+
+;; interestingness list
+;; http://www.flickr.com/services/api/flickr.interestingness.getList.html
+
+(ns livre.art.inhouse)
+
+;; Find camera images by tags
+;; Find scan images by tags or transcription
+## statistics/accounting
+
+(ns livre.accounting.statistics)
+;; turn material into counts of material
+;; display counts, textually or graphically
+
+
+;; word count
+;; material count
+;;   cards
+;;   pages
+;;   references
+;;   books
+;;     isbns
+;;   keywords
+
+
+(ns livre.accounting.beeminder)
+;; interact with beeminder api
+;; demonstrate that you're on track somehow... code, wordcount, editing, materials, ????
+
+
+(ns livre.accounting.iterations)
+;; dunno, but
+;; it seems like a good idea to have goals for iterations in mind
+;; and if you write something too early, to have it know that it can wait another couple weeks
+;; but i dunno if this is at the right abstraction level
+;; and also it's weird
+
+.
+├── api.clj
+├── client
+│   └── main.cljs
+├── config.clj
+├── controllers
+│   ├── common.clj
+│   └── search.clj
+├── data
+│   ├── data_readers.clj
+│   ├── glitch.clj
+│   ├── inventory.clj
+│   ├── transformations.clj
+│   └── util
+├── routes.clj
+├── server.clj
+├── topology
+│   ├── archive_goals.clj
+│   ├── objects.clj
+│   └── object-topology.clj
+├── ui
+│   ├── client -> ../client
+│   ├── server.clj -> ../server.clj
+│   └── views -> ../views
+└── views
+    ├── common.clj
+    └── welcome.clj
+
+9 directories, 17 files

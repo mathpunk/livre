@@ -8,6 +8,16 @@
   (history [ ] "all the history")
   )
 
+(ns livre.object-topology)
+
+(defprotocol Unit
+  (title [ ] "may or may not have a name")
+  (ws [ ] "exists in some writespace - better be pm or lf5, slacker")
+  (content [ ] "text, sound, image, etc")
+  (context [ ] "ooooh")
+  (history [ ] "all the history")
+  )
+
 (defprotocol Writespace [x]
   "A namespace for text. Like, a book you're working on, a side project, and letter to a circle. You can add whatever you
   like as you're drafting in this space, but they are membraned off from other text that you are working.
