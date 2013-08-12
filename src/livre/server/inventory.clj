@@ -1,4 +1,4 @@
-(ns livre.data.inventory
+(ns livre.server.inventory
   (:require [clojure.edn :as edn]))
 
 ; # thrower
