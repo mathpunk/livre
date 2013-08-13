@@ -1,5 +1,3 @@
-Ceci n'est pas un spec?
-
 # theory: text phenomenonomy
 
 ## granularity
@@ -14,7 +12,8 @@ scriptons
 designs
   
 
-## text topology
+## topologys of text
+
 hypertext is a graph
 codex text is a tree
 writespace text is hypertext with a label layer
@@ -22,6 +21,9 @@ script text is linear BUT needs breath to live
 game or generative text: ...?
  
   
+## godel escher bach
+
+
 
 
 
@@ -67,6 +69,7 @@ briar, because to send them things from GMail is professionally embarrassing.
 
 
 # data
+
 marshalling
   -> from-dir (text)
   schema
@@ -183,6 +186,7 @@ graph, grid, list
 ; it returns art based on contextual search
 
 # topology
+
 sets
 
 lists
@@ -206,6 +210,7 @@ measure
   
 
   
+
 # services
 
 get correct permissions to collaborators
@@ -266,14 +271,11 @@ what I'm thinking about now is, how can I refactor this directory tree to better
 been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't understand? I think by looking a bit
 closer at the projects.clj file...
 
-livre.server.server*        ; change ./project.clj
-livre.server.inventory*
-livre.server.storage
 livre.server.authentication
 
 livre.topology.atomic
-livre.topology.structure
 - work out multi/protocol on cards to learn the desired inheritance tree
+livre.topology.structure
 
 livre.client.main*
 livre.client.tattler
@@ -283,9 +285,6 @@ livre.client.editor
 # old specs
 
 some may have some utility, i guess?
-
-
-
 
 analysis/analysis.clj
 ;; looking for and handling aliases
