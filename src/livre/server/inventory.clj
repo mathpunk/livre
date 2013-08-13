@@ -28,8 +28,9 @@
 ; works
 
 (defn local-dir-to-local-edn [dirname] 
-    (let [data (tagged-value-of-a-directory dirname)]
-      (spit (clojure.java.io/file "/home/thomas/src/livre/data/test.edn") data)
+    (let [data (tagged-value-of-a-directory dirname)
+          output (clojure.java.io/file "/home/thomas/src/livre/data/test.edn")]
+      (map #(spit output % :append true) data)
      )
   )
 
