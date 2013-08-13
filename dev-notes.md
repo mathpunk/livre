@@ -1,28 +1,173 @@
+# summary of client services
+
+tattler, builder, editor. publisher. minder.
 
 ## ./tattler
+
 Something that publishes numbers and graphs on my material and my material-dt
-concepts: "numbers", "change"
+concepts: "numbers", "change".
+
+It tries to make those numbers go down by shaming the author and getting them to 
+put in a lot of time working in...
 
 ## ./builder
+
 Something for putting words, textons, and art in order.
 concepts: "order", "labels"
 
+Rank by interestingness somehow to get picked up by...
+
 ## ./editor
+
+Where to edit text. Local lighttable and federation otherwise? We just can't say.
+
 Make a guess at a story
 Afford reordering, editing, deletion
 Rank by 'readiness' somehow to get picked up by...
 
 ## ./publisher
+
 Call on pandoc to create ebooks, html, pdf, etc. 
+
+It is getting yelled at by...
 
 ## ./minder  [lowest priority]
 
-schedule
-mailings
-bookings
-fulfillment
+schedules to keep 
+mailings to send
+bookings to make and keep
+fulfillment schedule
 
 
+
+
+# on the server
+
+keeping track of inventory and scheduling
+
+## livre/inventory
+
+Tools for auditing what I've got and throwing it at the database for reuse and high weirdness.
+
+Erin Kissane, Elements of Content Strategy--
+  
+            Before we go much further, we need to discover what con-
+          tent already exists; this step is often called a quantitative
+          audit or content inventory. The web is full of useful advice
+          on conducting content audits, so I’ll stick to a brief summary.
+          Essentially, you’re going to create an extremely detailed site
+          map that represents every page and other piece of content
+          on the website you are working with, along with every other
+          piece of existing content that may end up on the site, but that
+          currently lives elsewhere.
+
+          For each piece of content, an inventory generally lists a:
+          • title,
+          • format (standard text, video, PDF, etc.),
+          • URL or other location,
+          • content type (landing page, article, support page, contact
+          page, etc.), and
+          • "owner" (person responsible for upkeep).
+
+
+
+### data
+* What data do I have?
+
+[ ] wiki files
+  early-pm-wiki
+  live wiki
+  is there additional footage, early drafts, etc?
+
+[ ] attributed-entity archives
+  en
+  tw
+
+[ ] coming soon: images
+  probably using prototypes or multis but don't sweat those details yet
+
+* Data formats, streams, concepts: a small tree
+
+marshalling
+  -> from-dir (text)
+  schema
+  to-edn ->
+storage
+retrieval
+  "connection"
+
+
+
+### statistics
+goal: To give the content elements some count or measure as a proxy for the review and merges of the editing process,
+so that there's some sort of accounting in place. 
+  
+it might be nice to have exercises, questions, challenges, see-alsos, etc., counted, but for now I only have:
+
+words
+cards
+pages
+
+and want to have 
+en's
+
+
+[x] static statistics 
+  we did a manual count for the last update
+
+[ ] live statistics
+  TODO
+
+future
+  d3?
+  c2?
+
+
+### storage
+
+Tools to abstract storage away so I can think of my data as values instead of a flux of bits.
+
+[x] edn/text
+  I can throw data at a file in edn format right now. 
+
+[ ] mongo
+  requires a vpn or tunnel
+  Nathan's on it
+
+
+
+## minder
+
+mailgun? excel?
+http://documentation.mailgun.com/
+
+
+
+# services on the client
+  
+## numbers/statistics: tattler
+  word count (raw)
+  clippings
+  pages
+  cards
+  
+### future?: api beeminder
+"For task tracking. See also 'accountability'"
+https://www.beeminder.com/api
+
+## feature creep/targeting other platforms
+federated wiki
+lighttable
+
+  
+
+
+
+
+
+
+
+## ordering/partial-ordure: buildure
 worktable
 results tray
 zoom in, zoom out
@@ -35,20 +180,120 @@ graph, grid, list
 ; it returns art based on contextual search
 
 
+### Edit Tags
+### Edit Queries
+
+display the unit
+display the unit's keywords in the keyword text area
+display controls and list their hotkeys
+rankings
+  (contrast-pair interesting-up, garbage-down)      ; interest layer
+  (contrast-pair early-up, later-down)              ; narrative layer
+next/random
+use a tag for sequence-- seq
+
+
+## editeur
+
+hoping to turn our data into "stories" with "journals" so as to reuse Ward's stuff. 
+
+
+[[clojurescript]]
+the user makes a query.
+the query is saved as a fact. 
+the query's results are displayed in an abbreviated list.
+the list items can be expanded.
+an item can be dragged into the copy area. 
+in this way, items are merged.... "save as a merge"?
+so when things are merged, they save some facts about where they came from...
+...possibly in the same abstraction, a bit of copy knows that it's been referencing some work or another, 
+  and adds it to the works cited data about the unit of copy that is developing 
+  
+  nb: vague as shit
 
 
 
-## spaces
+Edit Copy
+Edit Photo
+
+# the mathematical stuff: livre/topology
+
+Spaces of units interacting with us. 
+
+
+the other fun stuff.
+
+atoms
+partial orders
+trees
+graphs
+grids
+sequences
+
+measures
+  inventory-count
+  count-keyword-uses
+  
+fit vectors
+  probability-used
+  early
+    -late
+  interesting
+    -obscure
+  ready
+    -review
+
+fit topology
+  fuzzy subsethood
+  fuzzy equality
+  fuzzy mutual entropy (between what sort of object?)
+
+graph topology
+  u~v iff (intersect k(u), k(v) )
+  
+metrics, norms, distances
+  what's the difference? is there one? normed vector spaces, positive semidefinite, fuzzy union, fuzzy intersection,
+
+hypergraphs
+  words
+  keywords
+
+partial orders
+  word-cover
+  precedes
+  
+bag-of-words
+  words
+    etymology
+    frequency-analysis
+    part-of-speech
+    made-up-words
+    interesting-words
+    hierarchical-words
+      #
+      ##
+      etc
+
+surprise
+  it's an information-theoretic concept that i want to develop
+
+vectors
+  distance is a well-used metric for viz's one would think
+  but you're still looking for metric inputs in libraries
+  fuzzy subsethood
+
+
+### spaces
 
 Classical spaces. 
 
-### topological spaces
+#### topological spaces
 
-### categorical spaces
+#### categorical spaces
 
-### lattice space
+#### lattice space
 
-## textspaces
+### textspaces
 
 A more speculative space of spaces*, but still just ordinary sets and topologies with 
 
@@ -88,7 +333,7 @@ trees
     - "resolve multiple inheritance" as hypertext options
     - counting 'linearizations' of trees, counting hypertexts of trees, counting trees of graphs 
 
-## measure spaces
+### measure spaces
 
 measure
   count
@@ -98,11 +343,49 @@ measure
     mutual entropy
     to-crisp morphisms
 
-# code
+### statistics/accounting
 
-## solving problems
+I realize that this is getting toward a dangerously applicable area of mathematics for you, Tom, but in order to 
+drive home your ideas, you might want to consider applying data science to your own life, i.e., to better quantify
+the precise degree to which you are a bum.
 
-### weird alias problem
+
+(ns livre.accounting.statistics)
+;; turn material into counts of material
+;; display counts, textually or graphically
+
+;; word count
+;; material count
+;;   cards
+;;   pages
+;;   references
+;;   books
+;;     isbns
+;;   keywords
+
+(ns livre.accounting.beeminder)
+;; interact with beeminder api
+;; demonstrate that you're on track somehow... code, wordcount, editing, materials, ????
+
+(ns livre.accounting.iterations)
+;; dunno, but
+;; it seems like a good idea to have goals for iterations in mind
+;; and if you write something too early, to have it know that it can wait another couple weeks
+;; but i dunno if this is at the right abstraction level
+;; and also it's weird
+
+### actuarial
+
+i have nothing in particular, it just seems to follow right after accounting and right before casino theorist which
+ranks right before ^#^&$#&^&^.
+
+ex: create a procedure for taking a string from the shift-top of the keyboard and convert it to crowd-sourced swears of
+an appropriate level of transgression. 
+
+
+# specific problems to solve
+
+## weird alias problem
 prob: i used all these weird aliases as I was writing and I'd invent a meaning for them in my mind on the fly without writing it down. 
   you might say , it was as though i were working in too large an alphabet - extended by (( ?? !! and so forth.
 
@@ -123,17 +406,17 @@ search for: paired punctuation, e.g. add to post,
 
 
 
-## scrap code of interest
 
-;; Here, the goal will be to
+## the weird markdown problem
 ;;   change bad markdown (vimwiki 'equals' syntax)
+
+## converting markdown to hierarchies
 ;;   find top-level headings and their body
 ;;   find nth-level headings and their body
 ;;   build a data structure
 ;;   "qualify the namespace" with the name of the file plus these hierarchical words and phrases
 
-
-;; managing resources
+## link up hierarchies to namespaces of material
 
 (ns livre.material.morgue)
 ;; there are notebook names, which (kind of) relate to project/workspace/namespaces
@@ -145,7 +428,18 @@ search for: paired punctuation, e.g. add to post,
 ;;   by full text search
 ;;   by tag
 
-analysis/words.clj
+
+# avenues of analysis
+
+## working with words
+
+Litanies and Table of Contents
+top keywords
+brief contents
+unbrief contents
+Wordnik?
+
+?????????analysis/words.clj
 ;; word functions
 (ns livre.words.wordnik)
 (def my-wordnik-key "fe13b068fae9104fa90000d481c035c96157a13f3ca6f2ef9")
@@ -196,6 +490,8 @@ analysis/words.clj
 
 
 
+# art
+
 art.clj
 (ns livre.art.flickr)
 
@@ -220,68 +516,10 @@ art.clj
 
 
 
-statistics/accounting
 
-(ns livre.accounting.statistics)
-;; turn material into counts of material
-;; display counts, textually or graphically
+# tricky stuff
 
-
-;; word count
-;; material count
-;;   cards
-;;   pages
-;;   references
-;;   books
-;;     isbns
-;;   keywords
-
-
-(ns livre.accounting.beeminder)
-;; interact with beeminder api
-;; demonstrate that you're on track somehow... code, wordcount, editing, materials, ????
-
-
-(ns livre.accounting.iterations)
-;; dunno, but
-;; it seems like a good idea to have goals for iterations in mind
-;; and if you write something too early, to have it know that it can wait another couple weeks
-;; but i dunno if this is at the right abstraction level
-;; and also it's weird
-
-.
-├── api.clj
-├── client
-│   └── main.cljs
-├── config.clj
-├── controllers
-│   ├── common.clj
-│   └── search.clj
-├── data
-│   ├── data_readers.clj
-│   ├── glitch.clj
-│   ├── inventory.clj
-│   ├── transformations.clj
-│   └── util
-├── routes.clj
-├── server.clj
-├── topology
-│   ├── archive_goals.clj
-│   ├── objects.clj
-│   └── object-topology.clj
-├── ui
-│   ├── client -> ../client
-│   ├── server.clj -> ../server.clj
-│   └── views -> ../views
-└── views
-    ├── common.clj
-    └── welcome.clj
-
-9 directories, 17 files
-
-
-
-data-readers
+## data-readers
 
 The reason for is that they allow for data to be delivered to a clever function to do stuff to it right 
 when it arrives, before it even hits the compiler. 
@@ -290,6 +528,7 @@ The reason against is, the only thing I can think of right now is passing that t
 with some thought to semantics, and some working functions, I bet I can think of something useful to do
 as a datom comes in. 
 
+nevertheless, for now it's a complication.
 
 { 
 ; data-readers: 
@@ -304,51 +543,11 @@ as a datom comes in.
 
 
 
+# almost certainly everything below here is a copy. why don't you know? because reasons. 
 
-; relevant docs:
-;   *data-readers*
-
-; When Clojure starts, it searches for files named 'data_readers.clj'
-; at the root of the classpath. Each such file must contain a literal
-; map of symbols, like this:
-;
-;     {foo/bar my.project.foo/bar
-;      foo/baz my.project/baz}
-;
-; The first symbol in each pair is a tag that will be recognized by
-; the Clojure reader. The second symbol in the pair is the
-; fully-qualified name of a Var which will be invoked by the reader to
-; parse the form following the tag. For example, given the
-; data_readers.clj file above, the Clojure reader would parse this
-; form:
-;
-;     #foo/bar [1 2 3]
-;
-; by invoking the Var #'my.project.foo/bar on the vector [1 2 3]. The
-; data reader function is invoked on the form AFTER it has been read
-; as a normal Clojure data structure by the reader.
-;
-; Reader tags without namespace qualifiers are reserved for
-; Clojure. Default reader tags are defined in
-; clojure.core/default-data-readers but may be overridden in
-; data_readers.clj or by rebinding this Var.
-; test data
-
-; vimwiki (bad)
-= blah =
-find #"^=+\s\w"
-
-; vimwiki (good)
-
-; en
-
-; tw
-
-; images
-;   photos
-;   pages
-;   cards
-
+i must say: why do we need to have revisions noticed to notice that we've been making revisions? isn't it primarily a
+problem of surprise, which itself is a problem of entropy, which itself is a problem of information, which is itself a
+problem of data collection and translation?
 
 
 ## livre/inventory
@@ -568,33 +767,6 @@ dir dur dir
 ## ordure
 ### Up Down Left Right
 
-## buildure
-
-### Edit Tags
-### Edit Queries
-
-## editeur
-
-### Edit Copy
-### Edit Photo
-
-## wordure
-
-### Litanies and Table of Contents
-top keywords
-brief contents
-unbrief contents
-
-### Wordnik?
-
-
-## minder
-
-mailgun?
-http://documentation.mailgun.com/
-
-
-
 
 ## archives
 
@@ -789,7 +961,37 @@ search for: paired punctuation, e.g. add to post,
 
 
 
-## scrap code of interest
+## possible refactoring
+
+from Sat Aug 10 13:51:56 PDT 2013:
+$ l
+current
+/home/thomas/src/livre/src/livre/
+[redacted an outofdate dirtree]
+
+what I'm thinking about now is, how can I refactor this directory tree to better represent this notes document I've just 
+been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't understand? I think by looking a bit
+closer at the projects.clj file...
+
+livre.server.server*        ; change ./project.clj
+livre.server.inventory*
+livre.server.storage
+livre.server.authentication
+
+livre.topology.atomic
+livre.topology.structure
+- work out multi/protocol on cards to learn the desired inheritance tree
+
+livre.client.main*
+livre.client.tattler
+livre.client.builder
+livre.client.editor
+
+
+
+## scrap code
+
+probably repetition
 
 ;; Here, the goal will be to
 ;;   change bad markdown (vimwiki 'equals' syntax)
@@ -1014,241 +1216,6 @@ find #"^=+\s\w"
 ;   photos
 ;   pages
 ;   cards
-
-
-
-## livre/inventory
-
-Tools for auditing what I've got and throwing it at the database for reuse and high weirdness.
-
-Erin Kissane, Elements of Content Strategy--
-  
-            Before we go much further, we need to discover what con-
-          tent already exists; this step is often called a quantitative
-          audit or content inventory. The web is full of useful advice
-          on conducting content audits, so I’ll stick to a brief summary.
-          Essentially, you’re going to create an extremely detailed site
-          map that represents every page and other piece of content
-          on the website you are working with, along with every other
-          piece of existing content that may end up on the site, but that
-          currently lives elsewhere.
-
-          For each piece of content, an inventory generally lists a:
-          • title,
-          • format (standard text, video, PDF, etc.),
-          • URL or other location,
-          • content type (landing page, article, support page, contact
-          page, etc.), and
-          • "owner" (person responsible for upkeep).
-
-
-
-### data
-* What data do I have?
-
-[ ] wiki files
-  early-pm-wiki
-  live wiki
-  is there additional footage, early drafts, etc?
-
-[ ] attributed-entity archives
-  en
-  tw
-
-[ ] coming soon: images
-  probably using prototypes or multis but don't sweat those details yet
-
-* Data formats, streams, concepts: a small tree
-
-marshalling
-  -> from-dir (text)
-  schema
-  to-edn ->
-storage
-retrieval
-  "connection"
-
-
-
-### statistics
-goal: To give the content elements some count or measure as a proxy for the review and merges of the editing process,
-so that there's some sort of accounting in place. 
-  
-it might be nice to have exercises, questions, challenges, see-alsos, etc., counted, but for now I only have:
-
-words
-cards
-pages
-
-and want to have 
-en's
-
-
-[x] static statistics 
-  we did a manual count for the last update
-
-[ ] live statistics
-  TODO
-
-future
-  d3?
-  c2?
-
-
-### storage
-
-Tools to abstract storage away so I can think of my data as values instead of a flux of bits.
-
-[x] edn/text
-  I can throw data at a file in edn format right now. 
-
-[ ] mongo
-  requires a vpn or tunnel
-  Nathan's on it
-
-## livre/topology
-
-the other fun stuff.
-
-atoms
-partial orders
-trees
-graphs
-grids
-sequences
-
-measures
-  inventory-count
-  count-keyword-uses
-  
-fit vectors
-  probability-used
-  early
-    -late
-  interesting
-    -obscure
-  ready
-    -review
-
-fit topology
-  fuzzy subsethood
-  fuzzy equality
-  fuzzy mutual entropy (between what sort of object?)
-
-graph topology
-  u~v iff (intersect k(u), k(v) )
-  
-metrics, norms, distances
-  what's the difference? is there one? normed vector spaces, positive semidefinite, fuzzy union, fuzzy intersection,
-
-hypergraphs
-  words
-  keywords
-
-partial orders
-  word-cover
-  precedes
-  
-bag-of-words
-  words
-    etymology
-    frequency-analysis
-    part-of-speech
-    made-up-words
-    interesting-words
-    hierarchical-words
-      #
-      ##
-      etc
-
-surprise
-  it's an information-theoretic concept that i want to develop
-
-vectors
-  distance is a well-used metric for viz's one would think
-  but you're still looking for metric inputs in libraries
-  fuzzy subsethood
-
-
-## livre/ui
-
-the fun stuff
-### numbers/statistics: tattler
-  word count (raw)
-  clippings
-  pages
-  cards
-  
-### future?: api beeminder
-"For task tracking. See also 'accountability'"
-https://www.beeminder.com/api
-
-### ordering/partial-ordure: builder
-display the unit
-display the unit's keywords in the keyword text area
-display controls and list their hotkeys
-rankings
-  (contrast-pair interesting-up, garbage-down)      ; interest layer
-  (contrast-pair early-up, later-down)              ; narrative layer
-next/random
-use a tag for sequence-- seq
-
-
-### editor
-hoping to turn our data into "stories" with "journals" so as to reuse Ward's stuff. 
-
-
-[[clojurescript]]
-the user makes a query.
-the query is saved as a fact. 
-the query's results are displayed in an abbreviated list.
-the list items can be expanded.
-an item can be dragged into the copy area. 
-in this way, items are merged.... "save as a merge"?
-so when things are merged, they save some facts about where they came from...
-...possibly in the same abstraction, a bit of copy knows that it's been referencing some work or another, 
-  and adds it to the works cited data about the unit of copy that is developing 
-  
-  nb: vague as shit
-
-
-### feature creep/targeting other platforms
-federated wiki
-lighttable
-
-  
-
-
-
-
-
-
-
-## possible refactoring
-
-from Sat Aug 10 13:51:56 PDT 2013:
-$ l
-current
-/home/thomas/src/livre/src/livre/
-[redacted an outofdate dirtree]
-
-what I'm thinking about now is, how can I refactor this directory tree to better represent this notes document I've just 
-been working, WITHOUT fucking up a bunch of noir/compojure nonsense that I don't understand? I think by looking a bit
-closer at the projects.clj file...
-
-livre.server.server*        ; change ./project.clj
-livre.server.inventory*
-livre.server.storage
-livre.server.authentication
-
-livre.topology.atomic
-livre.topology.structure
-- work out multi/protocol on cards to learn the desired inheritance tree
-
-livre.client.main*
-livre.client.tattler
-livre.client.builder
-livre.client.editor
 
 
 
