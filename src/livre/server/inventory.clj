@@ -25,16 +25,18 @@
     (map #(str tag % "\n") values))
   )
 
-(defn local-dir-to-edn 
-  [dirname]
-  (local-dir-to-edn dirname "/home/thomas/src/livre/data/test.edn")
-  [dirname output]
+; works
+
+(defn local-dir-to-local-edn [dirname] 
     (let [data (tagged-value-of-a-directory dirname)]
-        
-        output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
-        (map #(spit output-file % :append true) (map #(str tag % "\n") values))
-    )
+      (spit (clojure.java.io/file "/home/thomas/src/livre/data/test.edn") data)
+     )
   )
+
+; used to work
+          
+(local-dir-to-local-edn text-test-dir)
+
 
 ; test
 ; --------------------------------------------------- 
