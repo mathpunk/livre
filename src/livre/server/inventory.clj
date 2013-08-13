@@ -5,7 +5,7 @@
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
-       :ws-path     (.getParent file)
+       :path     (.getParent file)
        :ws          (.getName (.getParentFile file))
        :content     (slurp file)
        :history     [{:tx (.lastModified file) :diff nil}]
@@ -19,10 +19,18 @@
     )
   )
 
-(defn dir-thrower [dirname]
+(defn tagged-value-of-a-directory [dirname]
   (let [values (transform-text-directory-to-values dirname) 
-        tag "#com.punkmathematics.livre/inventory "         
-        dir (clojure.java.io/file dirname)
+        tag "#com.punkmathematics.livre/inventory "]
+    (map #(str tag % "\n") values))
+  )
+
+(defn local-dir-to-edn 
+  [dirname]
+  (local-dir-to-edn dirname "/home/thomas/src/livre/data/test.edn")
+  [dirname output]
+    (let [data (tagged-value-of-a-directory dirname)]
+        
         output-file (str "/home/thomas/src/livre/data/" (.getName dir) ".edn")]
         (map #(spit output-file % :append true) (map #(str tag % "\n") values))
     )
@@ -30,8 +38,12 @@
 
 ; test
 ; --------------------------------------------------- 
-(def testdir "/home/thomas/cerebra/wiki/alg")
-(dir-thrower testdir)
+(def full-test-dir "/home/thomas/src/livre/material/")
+(def text-test-file "/home/thomas/src/livre/material/vimwiki/big-picture.wiki")
+(def text-test-dir "/home/thomas/src/livre/material/vimwiki")
+
+(dir-thrower text-test-dir)
+
 ; actually do it
 ; --------------------------------------------------- 
 ;  read a config file
