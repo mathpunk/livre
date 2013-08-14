@@ -9,6 +9,7 @@
   (:import [org.bson.types ObjectId] 
         [com.mongodb DB WriteConcern MongoOptions ServerAddress]))
 
+
 ; connect
 ;; (connect! { :host "localhost" :port 27017 })
 
@@ -24,36 +25,8 @@
     )
   )
 
-(connect-to-mongo)
 
-
-; turn target directory into values, adding ObjectIDs
-;
-; insert collection
-;
-; verify
-;
-; celebrate
-
-
-; ## Inserting documents and batches
-
-(m/insert "documents" { :_id (ObjectId.) :hello "darlin" })
-
-(m/insert-batch "document" [{ :first_name "John" :last_name "Lennon" }
-                          { :first_name "Paul" :last_name "McCartney" }])
-
-
-; ## Finding documents (as maps)
-
-(m/find-maps "documents" {:hello {$exists true}})
-
-
-
-
-
-
-; ## Value-ing files
+; turn target directory into values
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -64,25 +37,63 @@
       }
   )
 
-; value-of-an-image-file's differences:
-; :title nil
-; :ws nil
-; :content {:uri blah} ?
+; TODO: Refactor so that img and text files have the same-ish affordances
+; value-of-an-image-file
+;   :title nil
+;   :ws nil
+;   :content {:uri blah} ? ; it will come from the ~/material directory on livre at the moment
+
+
+; add ObjectIDs
+(defn id-stamp [m]
+  (assoc m :_id (org.bson.types.ObjectID.))
+  )
+
+
+; insert collection
 ;
+; verify find from collection
+; 
+; reevaluate next steps
+
+
+; ## Inserting documents and batches
+
+(m/insert "documents" { :_id (ObjectId.) :hello "darlin" })
+
+
+
+; ## Finding documents (as maps)
+
+(m/find-maps "documents" {:hello {$exists true}})
+
+
+; ## Value-ing files
+
 
 ; ## Working with Directories
-(defn- transform-text-directory-to-values [dirname]
+(defn- text-directory-as-values [dirname]
   (let [dir (clojure.java.io/file dirname),
         files (filter #(.isFile %) (file-seq dir))]
       (map value-of-a-text-file (remove #(.isHidden %) files))
     )
   )
 
-(defn- tagged-value-of-a-directory [dirname]
-  (let [values (transform-text-directory-to-values dirname) 
-        tag "#com.punkmathematics.livre/inventory "]
-    (map #(str tag % "\n") values))
+; (defn- tagged-value-of-a-directory [dirname]
+;   (let [values (text-directory-as-values dirname) 
+ ;        tag "#com.punkmathematics.livre/inventory "]
+  ;   (map #(str tag % "\n") values))
+  ; )
+
+(defn- do-add-text-dir-to-db [dirname]
+  (let [values (text-directory-as-values dirname)]
+    (do
+      (connect-to-mongo)
+      (m/insert-batch "document" values))
+    )
   )
+        
+
 
 ; testing
 ; --------------------------------------------------- 
