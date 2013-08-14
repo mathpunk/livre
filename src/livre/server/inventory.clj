@@ -1,37 +1,30 @@
-; I've been instructed not to care too much about databases. So, these functions just
-; take some data and write it as a text file in the extended data notation (edn),
-; specified here: https://github.com/edn-format/edn
-; 
-; For more database-y things, see src/livre/src/livre/server/storage.clj. Which is probably empty.
-; --th
-;
-;
 ; todo: 
 ; * should be able to handle img files too. instead of content, record a uri for the server to use. 
-; * should suck less
 
 
-(ns livre.server
+(ns livre.server.inventory
   (:require [monger.collection :as m])
-  (:use [monger.core :only [connect! connect set-db! get-db]]
+  (:use [monger.core :only [mongo-options server-address connect! connect set-db! get-db]]
         [monger.operators])
   (:import [org.bson.types ObjectId] 
         [com.mongodb DB WriteConcern MongoOptions ServerAddress]))
 
 ; connect
-;; given host, given port
-(mg/connect! { :host "localhost" :port 27017 })
+;; (connect! { :host "localhost" :port 27017 })
 
-;; using MongoOptions allows fine-tuning connection parameters,
+;; connect using MongoOptions to fine-tune connection parameters,
 ;; like automatic reconnection (highly recommended for production environment)
-(let [^MongoOptions opts (mg/mongo-options :threads-allowed-to-block-for-connection-multiplier 300)
-      ^ServerAddress sa  (mg/server-address "127.0.0.1" 27017)]
-  (mg/connect! sa opts))
+(defn connect-to-mongo [ ]
+  (let [^MongoOptions opts (mongo-options :threads-allowed-to-block-for-connection-multiplier 300)
+        ^ServerAddress sa  (server-address "127.0.0.1" 27017)]
+    (do
+      (connect! sa opts)
+      (set-db! (get-db "units"))
+      )
+    )
+  )
 
-
-;; localhost, default port
-(mg/connect!)
-(mg/set-db! (mg/get-db "units"))
+(connect-to-mongo)
 
 
 ; turn target directory into values, adding ObjectIDs
@@ -41,6 +34,23 @@
 ; verify
 ;
 ; celebrate
+
+
+; ## Inserting documents and batches
+
+(m/insert "documents" { :_id (ObjectId.) :hello "darlin" })
+
+(m/insert-batch "document" [{ :first_name "John" :last_name "Lennon" }
+                          { :first_name "Paul" :last_name "McCartney" }])
+
+
+; ## Finding documents (as maps)
+
+(m/find-maps "documents" {:hello {$exists true}})
+
+
+
+
 
 
 ; ## Value-ing files
@@ -82,19 +92,3 @@
 
 
 
-; ## Inserting documents and batches
-
-(insert "documents" { :_id (ObjectId.) :hello "world" })
-(insert-batch "document" [{ :first_name "John" :last_name "Lennon" }
-                          { :first_name "Paul" :last_name "McCartney" }])
-
-;; without document id (when you don't need to use it after storing the document)
-(insert "document" { :first_name "John" :last_name "Lennon" })
-
-(m/insert "documents" {:hello  "dolly" })
-
-(m/insert "documents" {:hello "nasty" })
-
-(m/insert "documents" {:hello "nurse"})
-
-(m/find-maps "documents" {:hello {$exists true}})
