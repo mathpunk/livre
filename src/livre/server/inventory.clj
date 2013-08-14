@@ -11,20 +11,20 @@
 ; * should suck less
 
 
-(ns livre.server.inventory
-  (:require [clojure.edn :as edn]))
-
+; Connecting
 (ns livre.server
   (:require [monger.core :as mg])
   (:import [com.mongodb MongoOptions ServerAddress]))
-(ns my.service.server
-  (:require [monger.collection :as mc])
-  (:use monger.operators))
+
+; with ObjectID
+
 (ns livre.server
-    (:use [monger.core :only [connect! connect set-db! get-db]]
-                  [monger.collection :only [insert insert-batch]])
-    (:import [org.bson.types ObjectId]
-                        [com.mongodb DB WriteConcern]))
+  (:require [monger.collection :as m])
+  (:use [monger.core :only [connect! connect set-db! get-db]]
+        [monger.operators])
+  (:import [org.bson.types ObjectId] 
+        [com.mongodb DB WriteConcern]))
+
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -53,12 +53,6 @@
     (map #(str tag % "\n") values))
   )
 
-(defn local-dir-to-local-edn [dirname output-name] 
-    (let [data (tagged-value-of-a-directory dirname)
-          output (clojure.java.io/file output-name)]
-      (map #(spit output % :append true) data)
-     )
-  )
 
 
 
@@ -68,7 +62,6 @@
 (def text-test-file "/home/thomas/src/livre/material/vimwiki/big-picture.wiki")
 (def text-test-dir "/home/thomas/src/livre/material/vimwiki")
 
-(local-dir-to-local-edn text-test-dir "/home/thomas/src/livre/data/test.edn")
 
 ; sanity docs
 ; * what am i doing?
