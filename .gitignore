@@ -1,0 +1,13 @@
+pom.xml
+*jar
+/lib/
+/classes/
+.lein-deps-sum
+.cake
+.lein-repl-history
+./target/stale/extract-native.dependencies
+/material
+/target/stale
+/data/*.edn
+target/repl-port
+resources/public/cljs
