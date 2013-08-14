@@ -24,7 +24,7 @@
   )
 
 
-; turn target directory into values
+; turn target (text) directory into values with unique IDs
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -35,41 +35,19 @@
       }
   )
 
-; TODO: Refactor so that img and text files have the same-ish affordances
+; [ ] TODO: Refactor so that img and text files have the same-ish affordances
 ; value-of-an-image-file
 ;   :title nil
 ;   :ws nil
 ;   :content {:uri blah} ? ; it will come from the ~/material directory on livre at the moment
 
-
-; add ObjectIDs
 (defn id-stamp [m]
+  "assoc an ObjectId with the given map. Use before inserting, b/c the Java MongoDB is not into immutables.
+
+  Test: (id-stamp (value-of-a-text-file (clojure.java.io/file text-test-file)))"
   (assoc m :_id (ObjectId.))
   )
 
-
-; insert collection
-;
-; verify find from collection
-; 
-; reevaluate next steps
-
-
-; ## Inserting documents and batches
-
-(m/insert "documents" { :_id (ObjectId.) :hello "darlin" })
-
-
-
-; ## Finding documents (as maps)
-
-(m/find-maps "documents" {:hello {$exists true}})
-
-
-; ## Value-ing files
-
-
-; ## Working with Directories
 (defn- text-directory-as-values [dirname]
   (let [dir (clojure.java.io/file dirname),
         files (filter #(.isFile %) (file-seq dir))]
@@ -77,12 +55,14 @@
     )
   )
 
-; (defn- tagged-value-of-a-directory [dirname]
-;   (let [values (text-directory-as-values dirname) 
- ;        tag "#com.punkmathematics.livre/inventory "]
-  ;   (map #(str tag % "\n") values))
-  ; )
 
+; test
+(def dir "./material/text/pm")
+(map id-stamp (text-directory-as-values dir))
+
+; it works! now take those values and add them to the collection.
+
+; like this?
 (defn- do-add-text-dir-to-db [dirname]
   (let [values (text-directory-as-values dirname)]
     (do
@@ -92,12 +72,15 @@
   )
         
 
+; verify: find from collection
+; eg: Finding documents (as maps)
+(m/find-maps "documents" {:hello {$exists true}})
+; 
+; reevaluate next steps
 
-; testing
-; --------------------------------------------------- 
-(def full-test-dir "/home/thomas/src/livre/material/")
-(def text-test-file "/home/thomas/src/livre/material/vimwiki/big-picture.wiki")
-(def text-test-dir "/home/thomas/src/livre/material/vimwiki")
+
+
+
 
 
 
