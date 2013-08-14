@@ -14,6 +14,17 @@
 (ns livre.server.inventory
   (:require [clojure.edn :as edn]))
 
+(ns livre.server
+  (:require [monger.core :as mg])
+  (:import [com.mongodb MongoOptions ServerAddress]))
+(ns my.service.server
+  (:require [monger.collection :as mc])
+  (:use monger.operators))
+(ns livre.server
+    (:use [monger.core :only [connect! connect set-db! get-db]]
+                  [monger.collection :only [insert insert-batch]])
+    (:import [org.bson.types ObjectId]
+                        [com.mongodb DB WriteConcern]))
 (defn- value-of-a-text-file [file]
      {
        :title       (.getName file)
@@ -82,9 +93,6 @@
 ;
 ; celebrate
 
-(ns livre.server
-  (:require [monger.core :as mg])
-  (:import [com.mongodb MongoOptions ServerAddress]))
 
 ;; given host, given port
 (mg/connect! { :host "localhost" :port 27017 })
@@ -104,11 +112,6 @@
 
 (mg/set-db! (mg/get-db "units"))
 
-(ns livre.server
-    (:use [monger.core :only [connect! connect set-db! get-db]]
-                  [monger.collection :only [insert insert-batch]])
-    (:import [org.bson.types ObjectId]
-                        [com.mongodb DB WriteConcern]))
 
 (insert "documents" { :_id (ObjectId.) :hello "world" })
 
@@ -127,9 +130,6 @@
 
 
 
-(ns my.service.server
-  (:require [monger.collection :as mc])
-  (:use monger.operators))
 
 (mc/insert "documents" {:hello  "dolly" })
 (mc/insert "documents" {:hello "nasty" })
