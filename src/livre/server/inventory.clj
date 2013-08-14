@@ -3,11 +3,9 @@
 
 
 (ns livre.server.inventory
-  (:require [monger.collection :as m])
-  (:use [monger.core :only [mongo-options server-address connect! connect set-db! get-db]]
-        [monger.operators])
-  (:import [org.bson.types ObjectId] 
-        [com.mongodb DB WriteConcern MongoOptions ServerAddress]))
+  (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q])
+  (:use [monger.operators])
+  (:import [org.bson.types ObjectId] [com.mongodb DB WriteConcern MongoOptions ServerAddress]))
 
 
 ; connect
@@ -16,11 +14,11 @@
 ;; connect using MongoOptions to fine-tune connection parameters,
 ;; like automatic reconnection (highly recommended for production environment)
 (defn connect-to-mongo [ ]
-  (let [^MongoOptions opts (mongo-options :threads-allowed-to-block-for-connection-multiplier 300)
-        ^ServerAddress sa  (server-address "127.0.0.1" 27017)]
+  (let [^MongoOptions opts (mc/mongo-options :threads-allowed-to-block-for-connection-multiplier 300)
+        ^ServerAddress sa  (mc/server-address "127.0.0.1" 27017)]
     (do
-      (connect! sa opts)
-      (set-db! (get-db "units"))
+      (mc/connect! sa opts)
+      (mc/set-db! (mc/get-db "units"))
       )
     )
   )
@@ -46,7 +44,7 @@
 
 ; add ObjectIDs
 (defn id-stamp [m]
-  (assoc m :_id (org.bson.types.ObjectID.))
+  (assoc m :_id (ObjectId.))
   )
 
 
