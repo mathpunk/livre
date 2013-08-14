@@ -26,13 +26,16 @@
 
 ; turn target (text) directory into values with unique IDs
 (defn- value-of-a-text-file [file]
+  (let [oid (ObjectId.)] 
      {
+       :_id         oid
        :title       (.getName file)
        :path     (.getParent file)
        :ws          (.getName (.getParentFile file))
        :content     (slurp file)
        :history     [{:tx (.lastModified file) :diff nil}]
       }
+    )
   )
 
 ; [ ] TODO: Refactor so that img and text files have the same-ish affordances
@@ -41,12 +44,6 @@
 ;   :ws nil
 ;   :content {:uri blah} ? ; it will come from the ~/material directory on livre at the moment
 
-(defn id-stamp [m]
-  "assoc an ObjectId with the given map. Use before inserting, b/c the Java MongoDB is not into immutables.
-
-  Test: (id-stamp (value-of-a-text-file (clojure.java.io/file text-test-file)))"
-  (assoc m :_id (ObjectId.))
-  )
 
 (defn- text-directory-as-values [dirname]
   (let [dir (clojure.java.io/file dirname),
@@ -57,29 +54,42 @@
 
 
 ; test
-(def dir "./material/text/pm")
-(map id-stamp (text-directory-as-values dir))
 
 ; it works! now take those values and add them to the collection.
 
 ; like this?
+(connect-to-mongo)
+
 (defn- do-add-text-dir-to-db [dirname]
   (let [values (text-directory-as-values dirname)]
     (do
-      (connect-to-mongo)
       (m/insert-batch "document" values))
     )
   )
-        
+
+(def base "/home/thomas/src/livre/")
+(def pm (str "material/text/pm/"))
+(def file (str base pm "keywords.wiki"))
+
+(value-of-a-text-file (clojure.java.io/file file))
+
+
+
+
+(do-add-text-dir-to-db dir)
 
 ; verify: find from collection
 ; eg: Finding documents (as maps)
-(m/find-maps "documents" {:hello {$exists true}})
-; 
+
+(m/find-maps "documents" {:ws {$exists true}})
+
+ 
 ; reevaluate next steps
 
 
 
+(insert-batch "document" [{ :first_name "John" :last_name "Lennon" }
+                          { :first_name "Paul" :last_name "McCartney" }])
 
 
 
