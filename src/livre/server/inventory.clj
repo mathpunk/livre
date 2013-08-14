@@ -23,9 +23,9 @@
     )
   )
 
+(connect-to-mongo)
 
-; turn target (text) directory into values with unique IDs
-(defn- value-of-a-text-file [file]
+(defn- text-file-as-value [file]
   (let [oid (ObjectId.)] 
      {
        :_id         oid
@@ -44,53 +44,32 @@
 ;   :ws nil
 ;   :content {:uri blah} ? ; it will come from the ~/material directory on livre at the moment
 
-
 (defn- text-directory-as-values [dirname]
   (let [dir (clojure.java.io/file dirname),
         files (filter #(.isFile %) (file-seq dir))]
-      (map value-of-a-text-file (remove #(.isHidden %) files))
+      (map text-file-as-value (remove #(.isHidden %) files))
+    )
+  )
+
+; add documents
+; I'm not convinced this works
+(defn- do-add-text-dir-to-db [dirname]
+  (let [values (text-directory-as-values dirname)]
+    (do
+      (m/insert-batch "document" values))          
     )
   )
 
 
 ; test
-
-; it works! now take those values and add them to the collection.
-
-; like this?
-(connect-to-mongo)
-
-(defn- do-add-text-dir-to-db [dirname]
-  (let [values (text-directory-as-values dirname)]
-    (do
-      (m/insert-batch "document" values))
-    )
-  )
-
 (def base "/home/thomas/src/livre/")
 (def pm (str "material/text/pm/"))
 (def file (str base pm "keywords.wiki"))
 
-(value-of-a-text-file (clojure.java.io/file file))
+(m/insert "document" (text-file-as-value (clojure.java.io/file file)))
 
 
-
-
-(do-add-text-dir-to-db dir)
-
-; verify: find from collection
-; eg: Finding documents (as maps)
-
-(m/find-maps "documents" {:ws {$exists true}})
-
- 
-; reevaluate next steps
-
-
-
-(insert-batch "document" [{ :first_name "John" :last_name "Lennon" }
-                          { :first_name "Paul" :last_name "McCartney" }])
-
-
-
+; prod
+(def the-real-thing  "/home/thomas/cerebra/wiki/pm/zeroth-draft")
+????
 
