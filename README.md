@@ -12,8 +12,8 @@ Book-as-a-Service, written in Clojure/Script and English.
 > -- Cybertext, Espen J. Aarseth
 
 ### Further reading
-*books ("starbooks"), James Bridle
-No Longer No Sense of an Ending, Dorian Taylor
+* Starbooks and the Death of the Work, James Bridle,  http://booktwo.org/notebook/starbooks-death-of-the-work/
+* No Longer No Sense of an Ending, Dorian Taylor, http://contentsmagazine.com/articles/no-longer-no-sense-of-an-ending/
 
 
 
