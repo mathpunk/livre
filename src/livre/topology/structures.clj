@@ -1,4 +1,9 @@
-(ns livre.object-topology)
+; Should be: graphs, lattices, and the like.
+; Is: This garbage.
+;
+(ns livre.structures)
+
+
 
 (defprotocol Unit
   (title [ ] "may or may not have a name")
@@ -41,3 +46,4 @@
   Writespace
   (ws [ ] "all")
   (home [ ] (config :directory))
+
