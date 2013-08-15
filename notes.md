@@ -1,9 +1,20 @@
 # theory: text phenomenonomy
 
+What's it like to be text?
+
+reading: Alien Phenomenology (Bogost), Cybertext (Aarseth)
+
+
 ## granularity
-question: when is words words and when is words thoughts?
+
+When are words merely words, and when are they thoughts?
   
 ## symmetry
+
+see Allen Tan's audition.js for a simple example of "rotating" text with sets as degrees of freedom. 
+
+## atoms
+
 words
 keywords
 units
@@ -23,6 +34,9 @@ game or generative text: ...?
   
 ## godel escher bach
 
+recursive transition networks
+multiple levels, smooth and jarring transitions between them
+"bottoming out"
 
 
 
@@ -38,18 +52,15 @@ copy may have templated fields like title, hed, pullquotes, etc
 copy is trying to be in the form of a "story" with different bits?
 
 ## stories
-I think it's worth distinguishing 'story' from 'copy' because you can tell when a story is either done or is convincing 
-you to come back next time, and because Ward uses the story abstraction, implemented as a list of <p>'s, <img>'s, and
-<data> structures. 
 
+In the Federated Wiki, the "story" is a thing that is a list of paragraphs, images, and data visualizations. 
 
 
 
 # writespaces
-In the interest of prototyping from the specific to the general, here are some writespaces I have:
+  
+One writes in different registers, to different audiences, to different standards. Here are 4 of mine:
 
-./
-  the toplevel of my ./wiki ought to be safe from prying eyes
 /pm
   the book i'm working on now
 /alg
@@ -68,18 +79,9 @@ Something that is "ready" in /briar should be PGP'd and secure-emailed to either
 briar, because to send them things from GMail is professionally embarrassing.
 
 
-# data
-
-marshalling
-  -> from-dir (text)
-  schema
-  to-edn ->
-storage
-retrieval
-  "connection"
-
 # material
 
+What's been created to date. 
 ## wiki
 A wiki is a convenient way to create hypertext. 
 
@@ -119,11 +121,6 @@ differently styled, attributed
 - twitter favorites
 - pinboard robots
 
-
-- wikis
-- clients
-  - editors
-  - readers
 
 # art
 ## found
@@ -187,6 +184,8 @@ graph, grid, list
 
 # topology
 
+## elementary
+
 sets
 
 lists
@@ -206,28 +205,18 @@ measure
   fuzzy
     subsethood [k1 k2]
     mutual entropy
-    to-crisp morphisms
+    fuzzy-to-crisp morphisms (diffeomorphism)
   
+## complex
+
+sets of keywords with fuzzy subsethood defined
+graphs weight-neighbored by those sets' pairwise measurements
 
   
-
-# services
-
-get correct permissions to collaborators
-
-github?
-
-db
-  dur dur dur
-  
-http
-  i can make a localhost but dunno how to route
-
 
 
 # journal
 
---------------------------------------------------------------
 Sat Aug 10 13:51:56 PDT 2013
 
 current
@@ -282,7 +271,7 @@ livre.client.tattler
 livre.client.builder
 livre.client.editor
 
-# old specs
+# old notes
 
 some may have some utility, i guess?
 
