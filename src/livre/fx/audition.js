@@ -1,6 +1,7 @@
 // AuditionText:
 // A quick sketch of how auditioning of different variations of text fragments in your writing might look like.
-// auditioned here: http://tanmade.com/making/audition-text/
+//
+// https://github.com/tealtan/AuditionText
 
 jQuery.fn.nextOrFirst = function(selector){
   var next = this.next(selector);
