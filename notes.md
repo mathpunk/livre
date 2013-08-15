@@ -31,6 +31,23 @@ What I've got to contextualize and use.
           $ ; cite, attribute, syndicate?
         ]
         
+#### wiki
+A wiki is a convenient way to create hypertext. 
+
+##### local wiki
+I use a wiki of almost flat files on a local disk. 
+
+##### federated wiki
+There's all sorts of things to like about Ward's federated wiki. What if we
+were to create JSON objects with his "story" and "journal" abstractions and
+build on top of that? 
+
+##### xikis
+What new actions and abstractions will xiki's afford when they become
+available and stable in our editors of choice? 
+
+
+
 ### structured text
   bibtex struct? 
     from isbn to bibtex struct
@@ -38,42 +55,8 @@ What I've got to contextualize and use.
   tw struct?
   other struct?
     list keys
-
-### images
-  card v scan, do i care? kind of 
-  photos
-  transcription?
-  text v. diagram
-  orientation
-  turk control
-  
-## queueing
-
-??????????????????
-i guess the plan right now is keyword hierarchies. and search. and vagueness.
-
-## IMPORT
-
-What's been created to date. 
-
-### wiki
-A wiki is a convenient way to create hypertext. 
-
-#### local wiki
-I use a wiki of almost flat files on a local disk. 
-
-#### federated wiki
-There's all sorts of things to like about Ward's federated wiki. What if we
-were to create JSON objects with his "story" and "journal" abstractions and
-build on top of that? 
-
-#### xikis
-What new actions and abstractions will xiki's afford when they become
-available and stable in our editors of choice? 
-
-
-
-### evernotes
+    
+#### evernotes
 Evernote is the most-built tool for copying disparate types of information
 (photographs, text notes, web clippings) and immediately putting them into
 categories, adding tags or other context. 
@@ -86,7 +69,8 @@ Problems with evernote:
 But you go to war with the army you've got, so I have many thousands of these
 notes to crack open and get at the gooey data center inside. 
 
-### tweets
+
+#### tweets
 Tweets come into my general morguespace in several different ways.
 
 - my own twitter archive, downloadable in batches from twitter.com
@@ -94,6 +78,22 @@ Tweets come into my general morguespace in several different ways.
 differently styled, attributed
 - twitter favorites
 - pinboard robots
+
+
+
+
+
+### images
+  card v scan, do i care? kind of 
+  photos
+  transcription?
+  text v. diagram
+  orientation
+  turk control
+  
+## queueing
+
+??????????????????
 
 
 
@@ -709,7 +709,7 @@ search for: paired punctuation, e.g. add to post,
 ;;   by tag
 
 
-# avenues of analysis
+# analysis
 
 ## working with words
 
@@ -819,6 +819,8 @@ art.clj
 
 
 # collaboration
+
+I have a lot of emails to write. 
 
 professors
   golan
