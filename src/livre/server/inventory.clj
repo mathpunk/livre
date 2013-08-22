@@ -71,5 +71,4 @@
 
 ; prod
 (def the-real-thing  "/home/thomas/cerebra/wiki/pm/zeroth-draft")
-????
 
