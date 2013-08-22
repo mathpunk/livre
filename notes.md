@@ -1541,6 +1541,57 @@ find #"^=+\s\w"
 
 
 
+## a schema sketch
+
+
+material
+----------------------------------
+
+* origin: twitter, evernote, card, notebook, camera, vimwiki
+-- path: @tweet -> @mathpunk
+
+{
+    _id: aa094gqijg4qogjaeray3940-yuq3,
+    'origin': <whence>,
+    'history': [
+        {
+            'timestamp': <ts>,
+            'change': 'creation',
+        }
+    ],
+    'content-type': "blob",
+    'content': <data>,
+    'keywords': [],
+    ('attrs': {}),
+    ('name': "blah"),
+}
+
+
+
+### kinds (of picture-like things)
+- card (scans)
+- notebook page (scans)
+    - filename
+- photos
+    - 
+
+
+### kinds of text-like things
+- EN
+    - attrs
+    - 
+- tweets
+    - attrs
+- text files
+    - timestamp
+    - content
+    - title
+    - origin (path)
+- textinos
+
+
+
+
 ## old notes
 
 some may have some utility, i guess?
