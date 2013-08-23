@@ -2,7 +2,7 @@
 ; * should be able to handle img files too. instead of content, record a uri for the server to use. 
 
 
-(ns livre.server.inventory
+(ns livre.models.content-inventory.inventory
   (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q])
   (:use [monger.operators])
   (:import [org.bson.types ObjectId] [com.mongodb DB WriteConcern MongoOptions ServerAddress]))

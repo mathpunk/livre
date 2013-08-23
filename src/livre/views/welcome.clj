@@ -1,7 +1,7 @@
 (ns livre.views.welcome
   (:require [livre.views.common :as common])
   (:use [noir.core :only [defpage]]
-        [livre.server.inventory :as inv]                          ;;;; this is where CG would put Overtone(s)
+        [livre.models.content-inventory.inventory :as inv]                          ;;;; this is where CG would put Overtone(s)
         [noir.fetch.remotes :only [defremote]]))
 
 ; landing page

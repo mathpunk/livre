@@ -1,4 +1,4 @@
-(ns livre.server.inventory
+(ns livre.models.content-inventory.inventory
   (:require [clojure.edn :as edn]))
 
 (defn local-dir-to-local-edn [dirname output-name] 
