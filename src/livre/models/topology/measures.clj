@@ -1,3 +1,6 @@
+; Pages are but one coordinatization of text space. 
+;
+;
 ; # count
 ; Counting is a map from finite sets to N. 
 ;
