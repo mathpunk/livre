@@ -1,3 +1,8 @@
+(ns livre.corpus
+  (:use [livre.db :only (article-space)]))
+
+(def corpus (article-space "/home/thomas/src/livre/material/wiki"))
+
 ; Goal: 
 ; Access the corpus abstractly.
 ; What's a corpus got?
@@ -57,3 +62,6 @@
     ([article] ; filter lines 
     ([article search]
 
+
+
+(def corpus (article-space "/home/thomas/src/livre/material/wiki"))
