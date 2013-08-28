@@ -44,3 +44,16 @@
 
   
 
+(ns livre.db
+  (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q])
+(defn lines 
+  [article]
+  (-> (article :content)
+      (
+
+
+(defn heds 
+  (fn 
+    ([article] ; filter lines 
+    ([article search]
+

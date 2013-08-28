@@ -1,55 +1,57 @@
-
 (ns livre.db
-  (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q])
+  (:require [monger.collection :as m] [monger.core :as mc])
   (:use [monger.operators])
   (:import [org.bson.types ObjectId] [com.mongodb DB WriteConcern MongoOptions ServerAddress]))
 
-
-; connect
-;; (connect! { :host "localhost" :port 27017 })
-
-;; connect using MongoOptions to fine-tune connection parameters,
-;; like automatic reconnection (highly recommended for production environment)
-(defn connect-to-mongo [ ]
+;; DB/Connection-- recommended options
+(defn connect-to-mongo [db]
   (let [^MongoOptions opts (mc/mongo-options :threads-allowed-to-block-for-connection-multiplier 300)
         ^ServerAddress sa  (mc/server-address "127.0.0.1" 27017)]
     (do
       (mc/connect! sa opts)
-      (mc/set-db! (mc/get-db "units"))
+      (mc/set-db! (mc/get-db db))
       )
     )
   )
 
-(connect-to-mongo)
+(connect-to-mongo "units")
+;; (connect! { :host "localhost" :port 27017 })                  ;; this is commented out for some reason
 
-(defn- text-file-as-value [file]
+;; Records
+(defn article [filename]
   (let [oid (ObjectId.)] 
      {
        :_id         oid
        :title       (.getName file)
-       :path     (.getParent file)
-       :ws          (.getName (.getParentFile file))
+       :path        (.getParent file)
        :content     (slurp file)
        :history     [{:tx (.lastModified file) :diff nil}]
       }
     )
   )
 
-; [ ] TODO: Refactor so that img and text files have the same-ish affordances
-; value-of-an-image-file
-;   :title nil
-;   :ws nil
-;   :content {:uri blah} ? ; it will come from the ~/material directory on livre at the moment
+(try
+  2      (/ 1 0)
+  3      (catch Exception e (str "caught exception: " (.getMessage e))))
+4  
+5 "caught exception: Divide by zero"
 
-(defn- text-directory-as-values [dirname]
+
+; test
+(def test-string "~/src/livre/material/wiki/test.wiki")
+
+(article test-string)
+
+;; Glue between files and records-- there's glue all over me oh dear god
+(defn text-directory-as-values [dirname]
   (let [dir (clojure.java.io/file dirname),
         files (filter #(.isFile %) (file-seq dir))]
       (map text-file-as-value (remove #(.isHidden %) files))
     )
   )
 
-; add documents
-; I'm not convinced this works
+;; Documents
+;; this may not work
 (defn- do-add-text-dir-to-db [dirname]
   (let [values (text-directory-as-values dirname)]
     (do
