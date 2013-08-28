@@ -43,6 +43,6 @@
   ]
   )
 
-;; SIGILS (MODERNE)
+;; Sigils (moderne)
 {:audition  '#{this|that|the other}  'audition.js}
 {:old-hed   #"^=.+=$"}
