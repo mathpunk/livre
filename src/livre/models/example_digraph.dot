@@ -1,0 +1,122 @@
+digraph antioutline {
+
+"punk mathematics evidence" -> "big picture"
+  "big picture" -> mind
+    mind ->  reality
+    mind -> "cognitive bias"
+  "big picture" -> world
+    world -> fucked
+      fucked -> war
+    world -> collapse
+    world -> climate
+  "big picture" -> punk
+    punk ->  authority
+    punk -> anarchism
+    punk -> society
+      society ->  property
+        property -> wealth
+          maps -> property
+      culture -> society
+      society -> crime
+      society -> poverty
+      inequality -> poverty
+      society ->  money
+        money -> capitalism
+        money -> finance
+        maps -> money
+        money -> debt
+
+"punk mathematics evidence" -> "personal shit"
+  "personal shit" -> education
+  "personal shit" -> "school sucks"
+  "personal shit" -> edupunk
+  "personal shit" -> rules
+    rules -> constraint
+"punk mathematics evidence" -> reality
+  reality -> truth
+    truth -> reason
+    truth -> rationality
+    truth -> bullshit
+  reality -> loops
+    loops -> equations
+  reality -> mindfuck
+    mindfuck -> paradox
+    mindfuck -> "primate math"
+  reality -> nature
+    nature -> physics
+      physics -> information
+      physics -> time
+      physics -> "quantum shit"
+    nature ->  biology
+
+"punk mathematics evidence" -> maps
+  maps ->  categories
+    categories ->  "category theory"
+  maps ->  numbers
+    numbers ->  "large numbers"
+    numbers ->  ratios
+  maps -> morphisms
+  maps ->  "maps 2"
+    "maps 2" ->  symmetry
+      patterns -> symmetry
+      patterns -> asymmetry
+  maps -> measurement
+    measurement -> metrics
+    quantification -> measurement
+    measurement -> statistics
+"punk mathematics evidence" -> choice
+  choice ->  "game theory"
+    "game theory" -> games
+    "game theory" -> cooperation
+  choice -> value
+    value -> ordering
+    value -> "selling nothing"
+  choice  -> control
+  choice -> malware
+  choice -> coercion
+"punk mathematics evidence" -> chaos
+  chaos -> change
+    change -> calculus
+    change -> iteration
+      computation -> iteration
+  chaos -> fractals
+  chaos -> chance
+  chaos -> uncertainty
+    uncertainty ->  "quantum shit"
+"punk mathematics evidence" -> systems
+  systems -> algorithms
+    algorithms -> data
+    computation -> algorithms
+  systems -> vectorality
+  systems -> corruption
+  systems -> models
+    models -> complexity
+  systems -> governments
+  systems ->  corporatism
+  systems -> economics
+  systems -> "virtual conspiracy"
+  systems -> cryptocracy
+    cryptocracy -> influence
+  systems -> slavery
+  systems -> labor
+  systems -> prisons
+    "large numbers" -> prisons
+"punk mathematics evidence" -> networks
+  networks -> occupy
+  networks -> sna
+  networks -> media
+  networks -> hierarchies
+    hierarchies -> hierarchy
+    hierarchies -> ordering
+      ordering -> power
+      ordering  -> metrics
+  networks -> internet
+    internet -> privacy
+    internet -> filters
+    ip -> internet
+    ip -> piracy
+    ip -> infocrime
+"punk mathematics evidence" -> ddiy
+  ddiy -> sharing
+  ddiy -> collaboration
+}

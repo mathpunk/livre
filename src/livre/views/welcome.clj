@@ -11,7 +11,7 @@
 
 ; statistics
 (defpage "/statistics" []
-  "Communicates with the server to get counts of resources and a last-modified estimate."
+  "Present counts of resources and a last-modified estimate."
         (common/layout
           [:div#statistics 
             [:p "word count: " (str "lots")]
@@ -19,6 +19,13 @@
             [:p "notebook pages: " (str 1686)]
             [:p "web clippings: " (str "parsing")]
            ]
+          )
+  )
+
+(defpage "/structure" []
+        (common/layout
+          [:div#canvas]
+
           )
   )
 
