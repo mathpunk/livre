@@ -1,4 +1,4 @@
-(ns livre.corpus
+(ns livre.models.archives
   (:use [livre.db :only (article-space)])
   (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q]))
 
@@ -30,17 +30,17 @@
 ;; ## lines
 
 
-(defn lines 
-  [article]
-  (-> (article :content)
-      (
+; (defn lines 
+;   [article]
+;   (-> (article :content)
+;       (
 
 ;; ## headings
 
-(defn heds 
-  (fn 
-    ([article] ; filter lines 
-    ([article search]
+; (defn heds 
+;   (fn 
+;     ([article] ; filter lines 
+;     ([article search]
 
 
 ;; ## stanzas
@@ -48,10 +48,10 @@
 
 ;; # PATTERN MATCHING
 ; this is just for playing with strings
-(defn toy-corpus
-  [content]
-  (fn 
-    ([ ] content)
-    ([pattern] (re-seq pattern content))))
-
+; (defn toy-corpus
+;   [content]
+;   (fn 
+;     ([ ] content)
+;     ([pattern] (re-seq pattern content))))
+; 
 ; what would the real one look like? well, it has to take some source for data...
