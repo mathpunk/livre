@@ -14,11 +14,9 @@
     )
   )
 
-(connect-to-mongo "units")
-;; (connect! { :host "localhost" :port 27017 })                  ;; this is commented out for some reason
 
-;; Records
-(defn article [filename]
+;; Article: records
+(defn article [file]
   (let [oid (ObjectId.)] 
      {
        :_id         oid
@@ -30,44 +28,35 @@
     )
   )
 
-(try
-  2      (/ 1 0)
-  3      (catch Exception e (str "caught exception: " (.getMessage e))))
-4  
-5 "caught exception: Divide by zero"
-
-
-; test
-(def test-string "~/src/livre/material/wiki/test.wiki")
-
-(article test-string)
-
-;; Glue between files and records-- there's glue all over me oh dear god
-(defn text-directory-as-values [dirname]
+;; Article space: many records
+(defn article-space [dirname]
   (let [dir (clojure.java.io/file dirname),
         files (filter #(.isFile %) (file-seq dir))]
-      (map text-file-as-value (remove #(.isHidden %) files))
+      (map article (remove #(.isHidden %) files))
     )
   )
 
-;; Documents
-;; this may not work
-(defn- do-add-text-dir-to-db [dirname]
-  (let [values (text-directory-as-values dirname)]
+
+;; Rebase many records into a database of some name
+(defn rebase-text-data [dirname dbname]
+  (let [values (article-space dirname)]
     (do
-      (m/insert-batch "document" values))          
+      (m/insert-batch dbname values))          
     )
   )
 
 
-; test
-(def base "/home/thomas/src/livre/")
-(def pm (str "material/text/pm/"))
-(def file (str base pm "keywords.wiki"))
+; Testing 
+(def test-string "/home/thomas/src/livre/material/wiki/test.wiki")
+(def test-file (clojure.java.io/file test-string))
+(def test-dirname "/home/thomas/src/livre/material/wiki")
 
-(m/insert "document" (text-file-as-value (clojure.java.io/file file)))
+(article test-file)
 
+(m/insert "articles" (article test-file))
 
-; prod
-(def the-real-thing  "/home/thomas/cerebra/wiki/pm/zeroth-draft")
+;; Usage
+(connect-to-mongo "units")
+;; (connect! { :host "localhost" :port 27017 })                  ;; this is commented out for some reason
 
+(rebase-text-data "units" "articles")
