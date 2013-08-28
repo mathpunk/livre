@@ -45,18 +45,16 @@
     )
   )
 
+(def corpus (article-space "/home/thomas/src/livre/material/wiki"))
 
-; Testing 
-(def test-string "/home/thomas/src/livre/material/wiki/test.wiki")
-(def test-file (clojure.java.io/file test-string))
-(def test-dirname "/home/thomas/src/livre/material/wiki")
 
-(article test-file)
-
-(m/insert "articles" (article test-file))
-
-;; Usage
+;; Mongo
+;; I'm not sure that the stuff is getting into the db/collection because I keep forgetting how to 
+;; get stuff out of a db/collection. Try this? 
+;; 
+;; As for "doing things" right now I'm just using a big dictionary as my corpus. See models/corpus.clj.
 (connect-to-mongo "units")
+(m/insert "articles" (article test-file))
 ;; (connect! { :host "localhost" :port 27017 })                  ;; this is commented out for some reason
-
 (rebase-text-data "units" "articles")
+
