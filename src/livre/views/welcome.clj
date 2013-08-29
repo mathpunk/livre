@@ -1,8 +1,9 @@
 (ns livre.views.welcome
   (:require [livre.views.common :as common])
   (:use [noir.core :only [defpage]]
-        [livre.models.archives :as arch]                          ;;;; this is where CG would put Overtone(s)
+        [livre.models.archives :as archives]                          ;;;; this is where CG would put Overtone(s)
         [noir.fetch.remotes :only [defremote]]))
+
 
 ; landing page
 (defpage "/" []
@@ -28,10 +29,6 @@
 
           )
   )
-
-; (defremote count-units [kind]
-  ; (inv/count-units kind))
-  ; (println "One number you can count to" is (rand)))
 
 ; builder
 (defpage "/builder" [ ]

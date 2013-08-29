@@ -27,6 +27,7 @@
 (def wc-total
   (number-of-words corpus))
 
+
 ;; ## lines
 
 
