@@ -45,16 +45,14 @@
     )
   )
 
-
 ;; Mongo
 ;; I'm not sure that the stuff is getting into the db/collection because I keep forgetting how to 
 ;; get stuff out of a db/collection. Try this? 
 ;; 
 ;; As for "doing things" right now I'm just using a big dictionary as my corpus. See models/corpus.clj.
-;; (connect-to-mongo "units")
+;; (connect-to-mongo "livre")
 
 ;; (m/insert "articles" (article "/home/thomas/src/livre/material/wiki/test.wiki"))
 
-;; (connect! { :host "localhost" :port 27017 })                  ;; I included this commented line for... reasons?
+;; (connect! { :host "feuille" :port 27017 })                  ;; I included this commented line for... reasons?
 ;; (rebase-text-data "units" "articles")
-
