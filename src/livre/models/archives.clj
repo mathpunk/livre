@@ -1,8 +1,12 @@
 (ns livre.models.archives
-  (:use [livre.db :only (article-space)])
-  (:require [monger.collection :as m] [monger.core :as mc] [monger.query :as q]))
+  (:use [livre.db :only [connect]])
+  (:require [monger.collection :as mc] [monger.query :as mq]))
 
+(connect)
 
+(mc/find-maps "annotations")
+
+(mc/find-maps "morgue")
 
 
 ;; corpus
@@ -60,37 +64,6 @@
     ; search back and forth among their keys
     ))
 
-
-
-;; zipper
-;; Try to think recursively: since your zipper has differnt functions at different levels, make a couple of different
-;; zippers
-
-
-(require '[clojure.zip :as zip])
-
-(def root-loc (zip/seq-zip (seq (map :title arts))))
-
-Usage: (zipper branch? children make-node root)
-
-    Creates a new zipper structure. 
-
-branch? is a fn that, given a node, returns true if can have
-children, even if it currently doesn't.
-
-children is a fn that, given a branch node, returns a seq of its
-children.
-
-make-node is a fn that, given an existing node and a seq of
-children, returns a new branch node with the supplied children.
-root is the root node.
-
-(def zp (zip/zipper false (gather-words "blahblah blah") (fn [node kids] nil) []))
-
-(def titles (map #(% :title) copy))
-
-(def z (zip/seq-zip titles))
-
 ; for corpus,
 ; create a vector of titles
 
@@ -106,6 +79,44 @@ root is the root node.
 ; for each line,
 ; create a vector of words
 
-fn [corpus]
-  :wq
+;; Article: records
+(defn article [file]
+  (let [oid (ObjectId.)] 
+     {
+       :_id         oid
+       :title       (.getName file)
+       :path        (.getParent file)
+       :content     (slurp file)
+       :history     [{:tx (.lastModified file) :diff nil}]
+      }
+    )
+  )
+
+;; Article space: many records
+(defn article-space [dirname]
+  (let [dir (clojure.java.io/file dirname),
+        files (filter #(.isFile %) (file-seq dir))]
+      (map article (remove #(.isHidden %) files))
+    )
+  )
+
+;; Rebase many records into a database of some name
+(defn rebase-text-data [dirname dbname]
+  (let [values (article-space dirname)]
+    (do
+      (m/insert-batch dbname values))          
+    )
+  )
+
+;; (rebase-text-data "units" "articles")
+
+(m/find-maps "annotations")
+
+(m/insert "articles" (article "/home/thomas/src/livre/material/wiki/test.wiki"))
+
+(mc/connect! { :host "feuille" :port 27017 })  
+
+(m/find)
+
+
 

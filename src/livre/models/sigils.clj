@@ -35,7 +35,7 @@
     {:tear #"^---\s*$"}
 
     ;; And who isn't excited by a cliffhanger?!
-    {:asteriensis #"^***\s*$"}
+    {:asterism #"^***\s*$"}
 
     ;; I also toyed with associating things inside the page. 
     {:assoc   #"\s?->\s?"}
