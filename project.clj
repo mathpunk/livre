@@ -6,10 +6,10 @@
                            [fetch "0.1.0-SNAPSHOT"]
                            [noir "1.3.0-beta3"]
                            [org.clojure/data.json "0.2.2"]
-                           [com.novemberain/monger "1.5.0"]
-                           ]
+                           [com.novemberain/monger "1.5.0"]]
     
-  :plugins [[lein-cljsbuild "0.3.2"]]
+  :plugins [[com.cemerick/austin "0.1.0"]
+            [lein-cljsbuild "0.3.2"]]
   :cljsbuild
   {:builds
     [{:source-paths ["src"],

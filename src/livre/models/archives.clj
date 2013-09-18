@@ -1,28 +1,47 @@
 (ns livre.models.archives
   (:use [livre.db :only [connect]])
-  (:require [monger.collection :as mc] [monger.query :as mq]))
+  (:require [monger.collection :as mc] [monger.query :as mq])
+  (:import [org.bson.types ObjectID]))
 
-(connect)
 
-(mc/find-maps "annotations")
 
-(mc/find-maps "morgue")
+;; articles
+(defn article [file]
+  (let [oid (ObjectId.)] 
+     {
+       :_id         oid
+       :title       (.getName file)
+       :path        (.getParent file)
+       :content     (slurp file)
+       :history     [{:tx (.lastModified file) :diff nil}]
+      }
+    )
+  )
 
+;; article collection
+(defn article-space [dirname]
+  (let [dir (clojure.java.io/file dirname),
+        files (filter #(.isFile %) (file-seq dir))]
+      (map article (remove #(.isHidden %) files))
+    )
+  )
 
 ;; corpus
-;;
 (defn corpus 
   [ ]
   (let [articles (article-space "/home/thomas/src/livre/material/wiki")]
     (fn [] articles)))
 
-   ; (fn [dict] ; for each key, search that field by values 
-   ;   )))
-
-
-;; articles (i.e., textons with names)
 
 (def number-of-articles (count corpus))
+
+;; rebase
+(defn rebase-text-data [dirname dbname]
+  (let [values (article-space dirname)]
+    (do
+      (m/insert-batch dbname values))          
+    )
+  )
 
 ;; headings
 ; (defn heds 
@@ -64,6 +83,7 @@
     ; search back and forth among their keys
     ))
 
+;; foreaches (???)
 ; for corpus,
 ; create a vector of titles
 
@@ -79,36 +99,11 @@
 ; for each line,
 ; create a vector of words
 
-;; Article: records
-(defn article [file]
-  (let [oid (ObjectId.)] 
-     {
-       :_id         oid
-       :title       (.getName file)
-       :path        (.getParent file)
-       :content     (slurp file)
-       :history     [{:tx (.lastModified file) :diff nil}]
-      }
-    )
-  )
-
-;; Article space: many records
-(defn article-space [dirname]
-  (let [dir (clojure.java.io/file dirname),
-        files (filter #(.isFile %) (file-seq dir))]
-      (map article (remove #(.isHidden %) files))
-    )
-  )
-
-;; Rebase many records into a database of some name
-(defn rebase-text-data [dirname dbname]
-  (let [values (article-space dirname)]
-    (do
-      (m/insert-batch dbname values))          
-    )
-  )
-
-;; (rebase-text-data "units" "articles")
+(defn test-connection []
+  (doseq
+    (connect)
+    (first (mc/find-maps "annotations"))
+    ))
 
 (m/find-maps "annotations")
 
@@ -117,6 +112,3 @@
 (mc/connect! { :host "feuille" :port 27017 })  
 
 (m/find)
-
-
-
