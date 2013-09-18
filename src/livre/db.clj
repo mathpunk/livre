@@ -17,3 +17,10 @@
 
 (defn connect [ ]
   (connection "feuille" "livre"))
+
+
+;;;; test
+
+(connect)
+
+(first (m/find-maps "annotations"))
