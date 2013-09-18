@@ -11,3 +11,5 @@ pom.xml
 /data/*.edn
 target/repl-port
 resources/public/cljs
+.repl
+/out
