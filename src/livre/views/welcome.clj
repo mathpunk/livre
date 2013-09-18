@@ -1,7 +1,7 @@
 (ns livre.views.welcome
   (:require [livre.views.common :as common])
   (:use [noir.core :only [defpage]]
-        [livre.models.archives :as archives]                          ;;;; this is where CG would put Overtone(s)
+        ; [livre.models.archives :as archives]                          ;;;; this is where CG would put Overtone(s)
         [noir.fetch.remotes :only [defremote]]))
 
 
