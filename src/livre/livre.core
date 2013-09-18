@@ -1,3 +1,0 @@
-;; Rebase my Punk Mathematics wiki
-(defn rebase-wiki [ ]
-  (rebase-articles "/home/thomas/src/livre/material/wiki/pm"
